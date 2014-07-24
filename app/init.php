@@ -31,3 +31,4 @@ ini_set('display_errors', 'On');
 
 require_once 'core/App.php';
 require_once 'core/Controller.php';
+require_once 'core/Database.php';
