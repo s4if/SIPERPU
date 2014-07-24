@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * The MIT License
  *
  * Copyright 2014 s4if.
@@ -24,4 +24,18 @@
  * THE SOFTWARE.
  */
 
-header('location:public/index.php');
+/**
+ * Description of home
+ *
+ * @author s4if
+ */
+//ga yakin, ini home besar ato home kecil
+class Home extends Controller {
+    
+    public function index($name = ''){
+        $user = $this->model('User');
+        $user->name = $name;
+       
+        $this->view('home/index', ['name' => $user->name, 'title'=>'Home!']);
+    }
+}

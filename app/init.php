@@ -24,4 +24,10 @@
  * THE SOFTWARE.
  */
 
-header('location:public/index.php');
+//Enable Error Reporting
+error_reporting(-1);
+ini_set('display_errors', 'On');
+//End Of Enable Error Reporting
+
+require_once 'core/App.php';
+require_once 'core/Controller.php';

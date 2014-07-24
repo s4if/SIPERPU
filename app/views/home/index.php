@@ -24,4 +24,5 @@
  * THE SOFTWARE.
  */
 
-header('location:public/index.php');
+?>
+Hello <?=$data['name'];?>

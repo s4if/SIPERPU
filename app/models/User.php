@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * The MIT License
  *
  * Copyright 2014 s4if.
@@ -24,4 +24,12 @@
  * THE SOFTWARE.
  */
 
-header('location:public/index.php');
+/**
+ * Description of User
+ *
+ * @author s4if
+ */
+class User {
+    
+    public $name;
+}

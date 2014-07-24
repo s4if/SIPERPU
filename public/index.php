@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 
 /* 
@@ -24,4 +25,8 @@
  * THE SOFTWARE.
  */
 
-header('location:public/index.php');
+
+require_once '../app/init.php';
+
+$app = new App;
+    
