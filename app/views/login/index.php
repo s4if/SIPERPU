@@ -23,29 +23,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-class Config{
-    public function __construct() {
-        
-    }
-    
-    public static function getBaseUrl(){
-        $baseUrl= '/SAPu-SKANIDA/public/';
-        return $baseUrl;
-    }
 
-    public static function getDB(){
-        # We are storing the information in this config array that will be required to connect to the database.
-        $config = array(
-                'host'		=> 'localhost',
-                'username'	=> 'root',
-                'password'	=> 'zaraki',
-                'dbname' 	=> 'sapu'
-        );
-        #connecting to the database by supplying required parameters
-        $db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['dbname'], $config['username'], $config['password']);
-
-        #Setting the error mode of our db object, which is very important for debugging.
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $db;
-    }
-}
+?>
+<div class="container" style="margin-top:30px">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-info">
+            <div class="panel-heading"><h3 class="panel-title"><strong>Silahkan Login</strong></h3></div>
+            <div class="panel-body">
+                <form role="form" method="post" action="">
+                    <div class="form-group">
+                        <input type="text" class="form-control" style="border-radius:0px" placeholder="NIP / NISN" name="username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" style="border-radius:0px" placeholder="Password" name="password">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-sm btn-default col-xs-4">Masuk</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

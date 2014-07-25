@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * The MIT License
  *
  * Copyright 2014 s4if.
@@ -23,29 +23,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-class Config{
-    public function __construct() {
-        
-    }
+
+/**
+ * Description of home
+ *
+ * @author s4if
+ */
+//ga yakin, ini home besar ato home kecil
+class Login extends Controller {
     
-    public static function getBaseUrl(){
-        $baseUrl= '/SAPu-SKANIDA/public/';
-        return $baseUrl;
-    }
-
-    public static function getDB(){
-        # We are storing the information in this config array that will be required to connect to the database.
-        $config = array(
-                'host'		=> 'localhost',
-                'username'	=> 'root',
-                'password'	=> 'zaraki',
-                'dbname' 	=> 'sapu'
-        );
-        #connecting to the database by supplying required parameters
-        $db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['dbname'], $config['username'], $config['password']);
-
-        #Setting the error mode of our db object, which is very important for debugging.
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $db;
+    public function index($name = ''){
+        $user = $this->model('User');
+        $user->name = $name;
+        $baseUrl = Config::getBaseUrl();
+       
+        $this->view('login/index', ['baseUrl' => $baseUrl ,'name' => $user->name, 'title'=>'Home!']);
     }
 }
