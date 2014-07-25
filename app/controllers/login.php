@@ -26,25 +26,77 @@
 
 class Login extends Controller {
     
-    public function index($name = ''){
+    public function index($nip = '', $errors = []){
         $baseUrl = Config::getBaseUrl();
-        $user = $this->model('User');
-        $user->name = $name;
        
         $this->view('login/index', ['baseUrl' => $baseUrl ,
-            'name' => $user->name, 
-            'title'=>'Home!']);
+            'nip' => $nip,
+            'errors' => $errors,
+            'title'=>'Login Sistem Absensi Perpustakaan']);
     }
     
-    public function test(){
-        $baseUrl = Config::getBaseUrl();
-        $user = $this->model('User');
-        $user->name = $_POST['username'];
-        $user->password = $_POST['password'];
-       
-        $this->view('login/test', ['baseUrl' => $baseUrl ,
-            'name' => $user->name, 
-            'password' => $user->password, 
-            'title'=>'Home!']);
+    //nanti dihapus
+//    public function test(){
+//        $baseUrl = Config::getBaseUrl();
+//        $user = $this->model('User');
+//        $user->name = $_POST['username'];
+//        $user->password = $_POST['password'];
+//       
+//        $this->view('login/test', ['baseUrl' => $baseUrl ,
+//            'name' => $user->name, 
+//            'password' => $user->password, 
+//            'title'=>'Login Sistem Absensi Perpustakaan']);
+//    }
+    
+    public function login(){
+        $guru = $this->model('Guru');
+        $errors = [];
+        $nip = '';
+        if(isset($_POST['nip'])&&isset($_POST['password'])){
+            $nip = $_POST['nip'];
+            $password = $_POST['password'];
+            $guru->nip = $nip;
+            if($guru->userExists()){
+                $this->auth($guru, $password);
+            }else{
+                $errors [] = 'Kesalahan : Guru dengan NIP = '.$nip.' tidak ditemukan!!';
+                $this->view('login/index', ['baseUrl' => Config::getBaseUrl() ,
+                    'nip' => $nip,
+                    'errors' => $errors,
+                    'title'=>'Login Sistem Absensi Perpustakaan']);
+            }
+        }  else {
+            //$errors [] = 'Kesalahan : Tidak ada input!';
+            $this->view('login/index', ['baseUrl' => Config::getBaseUrl() ,
+                    'nip' => $nip,
+                    'errors' => $errors,
+                    'title'=>'Login Sistem Absensi Perpustakaan']);
+        }
+    }
+    
+    private function auth($guru, $password){
+        $stored_password = $guru->fetchPassword();
+        if($stored_password == $password){
+            $guru->fetch();
+            $_SESSION['nip'] = $guru->nip;
+            $_SESSION['nama'] = $guru->nama;
+            $_SESSION['jenis_kelamin'] = $guru->jenis_kelamin;
+            $_SESSION['cp'] = $guru->cp;
+            $this->view('home/index', ['nama' => $guru->nama,
+                'baseUrl' => Config::getBaseUrl(),
+                'title' => 'Beranda']);
+        }else{
+            $errors [] = 'Kesalahan : Password Salah!';
+            $this->view('login/index', ['baseUrl' => Config::getBaseUrl() ,
+                'nip' => $guru->nip,
+                'errors' => $errors,
+                'title'=>'Login Sistem Absensi Perpustakaan']);
+        }
+    }
+
+    public function logout(){
+        session_destroy();
+        $this->view('login/index', ['baseUrl' => Config::getBaseUrl() ,
+            'title'=>'Login Sistem Absensi Perpustakaan']);
     }
 }

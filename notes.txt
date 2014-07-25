@@ -1,0 +1,9 @@
+penamaan :
+-iniMethodDalamKelas()
+-ini_variabel
+-php = Bhs inggris
+-MySQL = Bhs Indonesia
+
+[19/7/14-19.04]
+Masih kurang memperbaiki Loginnya!!
+Kasih Error Reportnya!!

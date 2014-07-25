@@ -40,6 +40,10 @@ class App {
     protected $params = [];
     
     public function __construct() {
+        
+        $conf = new Config;
+        $db = $conf->getDB();
+        
         $url = $this->parseUrl();
         
         if(file_exists('../app/controllers/'.$url[0].'.php')){
@@ -50,6 +54,7 @@ class App {
         require_once '../app/controllers/'.$this->controller.'.php';
         
         $this->controller = new $this->controller;
+        $this->controller->setDB($db);
         
         if(isset($url[1])){
             if(method_exists($this->controller, $url[1])){

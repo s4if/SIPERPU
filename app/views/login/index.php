@@ -30,15 +30,19 @@
         <div class="panel panel-primary">
             <div class="panel-heading"><h3 class="panel-title"><strong>Silahkan Login</strong></h3></div>
             <div class="panel-body">
-                <form role="form" method="post" action="<?=$data['baseUrl']?>">
+                <?php if(empty($data['errors']) === false){
+                    echo '<div class="alert alert-danger"><p>' . implode('</p><p>', $data['errors']) . '</p></div>';			
+                } 
+                ?>
+                <form role="form" method="post" action="<?=$data['baseUrl']?>public/">
                     <div class="form-group">
-                        <input type="text" class="form-control" style="border-radius:0px" placeholder="NIP" name="username">
+                        <input type="text" class="form-control" style="border-radius:0px" placeholder="NIP" name="nip" value="<?=$data['nip'];?>" required="true">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" style="border-radius:0px" placeholder="Password" name="password">
+                        <input type="password" class="form-control" style="border-radius:0px" placeholder="Password" name="password" required="true">
                     </div>
                     <div class="form-group form-inline">
-                        <input type="text" class="form-control col-xs-8 invisible" name="url" value="login/index">
+                        <input type="text" class="form-control col-xs-4 invisible" name="url" value="login/login">
                         <button type="submit" class="btn btn-sm btn-default col-xs-4">Masuk</button>
                     </div>
                 </form>

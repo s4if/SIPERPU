@@ -24,4 +24,4 @@
  * THE SOFTWARE.
  */
 
-header('location:public/index.php');
+header('location:public/login');

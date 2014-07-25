@@ -29,6 +29,9 @@ error_reporting(-1);
 ini_set('display_errors', 'On');
 //End Of Enable Error Reporting
 
+session_start();
+
 require_once 'core/App.php';
 require_once 'core/Controller.php';
 require_once 'core/Config.php';
+require_once 'core/Model.php';

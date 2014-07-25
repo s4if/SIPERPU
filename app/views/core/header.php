@@ -29,8 +29,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title><?=$data['title'];?></title>
-    <link href="<?=$data['baseUrl'];?>css/bootstrap.min.css" rel="stylesheet">
-    <script src="<?=$data['baseUrl'];?>js/jquery-2.0.3.min.js"></script>
-    <script src="<?=$data['baseUrl'];?>js/bootstrap.min.js"></script>
+    <link href="<?=$data['baseUrl'];?>public/css/bootstrap.min.css" rel="stylesheet">
+    <script src="<?=$data['baseUrl'];?>public/js/jquery-2.0.3.min.js"></script>
+    <script src="<?=$data['baseUrl'];?>public/js/bootstrap.min.js"></script>
 </head>
 <body>

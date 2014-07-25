@@ -30,6 +30,7 @@
  * @author s4if
  */
 class Controller {
+    protected $db;
     //put your code here
     public function model($model){
         require_once '../app/models/'.$model.'.php';
@@ -40,5 +41,9 @@ class Controller {
         require_once '../app/views/core/header.php';
         require_once '../app/views/'.$view.'.php';
         require_once '../app/views/core/footer.php';
+    }
+    
+    public function setDB($db){
+        $this->db = $db;
     }
 }

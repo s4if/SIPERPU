@@ -25,4 +25,6 @@
  */
 
 ?>
-Hello <?=$data['name'];?>
+Hello <?php echo isset($data['name'])? $data['name']:'';
+echo isset($data['nama'])? $data['nama']:'';
+?>
