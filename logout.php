@@ -1,6 +1,6 @@
 <?php
 
-/*
+/* 
  * The MIT License
  *
  * Copyright 2014 s4if.
@@ -24,27 +24,9 @@
  * THE SOFTWARE.
  */
 
-/**
- * Description of Controller
- *
- * @author s4if
- */
-class Controller {
+//Hanya kelas jadi2an, digunakan untuk logout jika terpaksa!!
+//setelah jadi, harus dihapus!!
+session_start();
+session_destroy();
+header('location:public/login');
 
-    public function model($model){
-        require_once '../app/models/'.$model.'.php';
-        return new $model();
-    }
-    
-    public function view($view, $data = []){
-        require_once '../app/views/core/header.php';
-        require_once '../app/views/'.$view.'.php';
-        require_once '../app/views/core/footer.php';
-    }
-    
-    public function logout(){
-        session_destroy();
-        $this->view('login/index', ['baseUrl' => Config::getBaseUrl() ,
-            'title'=>'Login Sistem Absensi Perpustakaan']);
-    }
-}

@@ -27,6 +27,7 @@
 class Login extends Controller {
     
     public function index($nip = '', $errors = []){
+        $this->sessionCheck();
         $baseUrl = Config::getBaseUrl();
        
         $this->view('login/index', ['baseUrl' => $baseUrl ,
@@ -49,6 +50,7 @@ class Login extends Controller {
 //    }
     
     public function login(){
+        $this->sessionCheck();
         $guru = $this->model('Guru');
         $errors = [];
         $nip = '';
@@ -66,7 +68,6 @@ class Login extends Controller {
                     'title'=>'Login Sistem Absensi Perpustakaan']);
             }
         }  else {
-            //$errors [] = 'Kesalahan : Tidak ada input!';
             $this->view('login/index', ['baseUrl' => Config::getBaseUrl() ,
                     'nip' => $nip,
                     'errors' => $errors,
@@ -74,6 +75,7 @@ class Login extends Controller {
         }
     }
     
+    //autentifikasi password
     private function auth($guru, $password){
         $stored_password = $guru->fetchPassword();
         if($stored_password == $password){
@@ -93,10 +95,11 @@ class Login extends Controller {
                 'title'=>'Login Sistem Absensi Perpustakaan']);
         }
     }
-
-    public function logout(){
-        session_destroy();
-        $this->view('login/index', ['baseUrl' => Config::getBaseUrl() ,
-            'title'=>'Login Sistem Absensi Perpustakaan']);
+    
+    //mengecek jika sesi sudah ada, maka tidak boleh menampilkan login!
+    private function sessionCheck(){
+        if(isset($_SESSION['nip'])){
+            header('location:'.Config::getBaseUrl().'public/home/index');
+        }
     }
 }

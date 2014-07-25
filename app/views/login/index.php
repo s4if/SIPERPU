@@ -36,7 +36,7 @@
                 ?>
                 <form role="form" method="post" action="<?=$data['baseUrl']?>public/">
                     <div class="form-group">
-                        <input type="text" class="form-control" style="border-radius:0px" placeholder="NIP" name="nip" value="<?=$data['nip'];?>" required="true">
+                        <input type="text" class="form-control" style="border-radius:0px" placeholder="NIP" name="nip" value="<?php echo isset($data['nip'])? $data['nip']:'';?>" required="true">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" style="border-radius:0px" placeholder="Password" name="password" required="true">
