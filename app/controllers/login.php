@@ -24,19 +24,27 @@
  * THE SOFTWARE.
  */
 
-/**
- * Description of home
- *
- * @author s4if
- */
-//ga yakin, ini home besar ato home kecil
 class Login extends Controller {
     
     public function index($name = ''){
+        $baseUrl = Config::getBaseUrl();
         $user = $this->model('User');
         $user->name = $name;
-        $baseUrl = Config::getBaseUrl();
        
-        $this->view('login/index', ['baseUrl' => $baseUrl ,'name' => $user->name, 'title'=>'Home!']);
+        $this->view('login/index', ['baseUrl' => $baseUrl ,
+            'name' => $user->name, 
+            'title'=>'Home!']);
+    }
+    
+    public function test(){
+        $baseUrl = Config::getBaseUrl();
+        $user = $this->model('User');
+        $user->name = $_POST['username'];
+        $user->password = $_POST['password'];
+       
+        $this->view('login/test', ['baseUrl' => $baseUrl ,
+            'name' => $user->name, 
+            'password' => $user->password, 
+            'title'=>'Home!']);
     }
 }

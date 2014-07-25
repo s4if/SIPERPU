@@ -38,7 +38,7 @@ class App {
     protected $method = 'index';
     
     protected $params = [];
-
+    
     public function __construct() {
         $url = $this->parseUrl();
         
@@ -64,7 +64,9 @@ class App {
     }
     
     public function parseUrl(){
-        if(isset($_GET['url'])){
+        if(isset ($_POST['url'])){
+            return $url = explode('/',filter_var(rtrim($_POST['url'],'/'), FILTER_SANITIZE_URL));
+        }elseif(isset($_GET['url'])){
             return $url = explode('/',filter_var(rtrim($_GET['url'],'/'), FILTER_SANITIZE_URL));
         }
     }

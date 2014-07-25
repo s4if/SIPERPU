@@ -25,24 +25,7 @@
  */
 
 ?>
-<div class="container" style="margin-top:30px">
-    <div class="col-md-4 col-md-offset-4">
-        <div class="panel panel-primary">
-            <div class="panel-heading"><h3 class="panel-title"><strong>Silahkan Login</strong></h3></div>
-            <div class="panel-body">
-                <form role="form" method="post" action="<?=$data['baseUrl']?>">
-                    <div class="form-group">
-                        <input type="text" class="form-control" style="border-radius:0px" placeholder="NIP" name="username">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" style="border-radius:0px" placeholder="Password" name="password">
-                    </div>
-                    <div class="form-group form-inline">
-                        <input type="text" class="form-control col-xs-8 invisible" name="url" value="login/index">
-                        <button type="submit" class="btn btn-sm btn-default col-xs-4">Masuk</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<div class="container-fluid">
+    <p><?=$data['name'];?></p>
+    <p><?=$data['password'];?></p>
 </div>
