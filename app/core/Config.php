@@ -23,13 +23,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-class Database{
+class Config{
     public function __construct() {
         
     }
     
-    public function getDB(){
+    public static function getBaseUrl(){
+        $baseUrl= 'localhost://SAPu-SKANIDA/public/';
+        return $baseUrl;
+    }
+
+    public static function getDB(){
         # We are storing the information in this config array that will be required to connect to the database.
         $config = array(
                 'host'		=> 'localhost',

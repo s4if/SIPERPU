@@ -35,7 +35,8 @@ class Home extends Controller {
     public function index($name = ''){
         $user = $this->model('User');
         $user->name = $name;
+        $baseUrl = Config::getBaseUrl();
        
-        $this->view('home/index', ['name' => $user->name, 'title'=>'Home!']);
+        $this->view('home/index', ['baseUrl' => $baseUrl ,'name' => $user->name, 'title'=>'Home!']);
     }
 }
