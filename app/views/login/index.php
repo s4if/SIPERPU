@@ -36,13 +36,13 @@
                 ?>
                 <form role="form" method="post" action="<?=$data['baseUrl']?>public/">
                     <div class="form-group">
-                        <input type="text" class="form-control" style="border-radius:0px" placeholder="NIP" name="nip" value="<?php echo isset($data['nip'])? $data['nip']:'';?>" required="true">
+                        <input type="text" class="form-control" placeholder="NIP" name="nip" value="<?php echo isset($data['nip'])? $data['nip']:'';?>" required="true">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" style="border-radius:0px" placeholder="Password" name="password" required="true">
+                        <input type="password" class="form-control" placeholder="Password" name="password" required="true">
                     </div>
-                    <div class="form-group form-inline">
-                        <input type="text" class="form-control col-xs-4 invisible" name="url" value="login/login">
+                    <div class="form-group form-horizontal">
+                        <input type="text" class="form-control col-xs-4 hidden" name="url" value="login/login">
                         <button type="submit" class="btn btn-sm btn-default col-xs-4">Masuk</button>
                     </div>
                 </form>

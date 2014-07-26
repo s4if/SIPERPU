@@ -23,7 +23,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
+$data['nav-location'] = 'admin';
+require_once '../app/views/core/navbar.php';
 ?>
 Hello <?php echo isset($data['name'])? $data['name']:'';
 echo isset($data['nama'])? $data['nama']:'';
