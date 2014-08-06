@@ -29,24 +29,28 @@
  *
  * @author s4if
  */
-class Guru extends Model {
-    public $nip;
+class Siswa extends Model {
+    public $nis;
     public $nama;
-    public $password;
+    public $kelas;
+    public $jurusan;
+    public $paralel;
     public $jenis_kelamin;
     
     public function fetch(){
         
-        $query = $this->db->prepare("select * from guru where nip = ?");
-        $query->bindValue(1, $this->nip);
+        $query = $this->db->prepare("select * from siswa where nis = ?");
+        $query->bindValue(1, $this->nis);
         
         try{
 		
             $query->execute();
             $data = $query->fetch();
             $this->nama = $data['nama'];
-            $this->password = $data['password'];
-            $this->jenis_kelamin = $data['jenis_kelamin'];
+            $this->kelas = $data['kelas'];
+            $this->jurusan = $data['jurusan'];
+            $this->paralel = $data['paralel'];
+            $this->jenis_kelamin = $data['alamat'];
  
 	}catch(PDOException $e){
             die($e->getMessage());
@@ -56,45 +60,27 @@ class Guru extends Model {
     public function assign($data = []){
         
         $this->nama = $data['nama'];
-        $this->password = $data['password'];
-        $this->jenis_kelamin = $data['jenis_kelamin'];
+        $this->kelas = $data['kelas'];
+        $this->jurusan = $data['jurusan'];
+        $this->paralel = $data['paralel'];
+        $this->jenis_kelamin = $data['alamat'];
         
     }
     
-    public function fetchPassword(){
-        $query = $this->db->prepare("select password from guru where nip = ?");
-        $query->bindValue(1, $this->nip);
+    public function fetchAllNIS(){
+        
+        $query = $this->db->prepare("select nis from siswa");
+        
         try{
 		
             $query->execute();
-            $data = $query->fetch();
-            $this->password = $data['password'];
-            return $this->password;
- 
+            $data = $query->fetchAll();
+            return $data;
+            
 	}catch(PDOException $e){
-		die($e->getMessage());
-	}
-    }
-    
-    public function userExists() {
-        
-        $strquery = "SELECT COUNT(`nip`) FROM `guru` WHERE `nip`= ?";
-        $query = $this->db->prepare($strquery);
-        $query->bindValue(1, $this->nip);
-
-        try{
-
-            $query->execute();
-            $rows = $query->fetchColumn();
-
-            if($rows == 1){
-                return true;
-            }else{
-                return false;
-            }
-
-        } catch (PDOException $e){
+            
             die($e->getMessage());
+            
         }
     }
 }

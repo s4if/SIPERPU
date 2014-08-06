@@ -42,10 +42,10 @@
             <ul class="nav navbar-nav">
                 <li class="<?php if(isset($data['nav-location'])) {
                     echo ($data['nav-location'] == 'absensi')?'active':''; 
-                }?>"><a href="#">Absensi</a></li>
+                }?>"><a href="<?php echo $data['baseUrl'];?>public/absen/index">Absensi</a></li>
                 <li class="<?php if(isset($data['nav-location'])) {
                     echo ($data['nav-location'] == 'admin')?'active':''; 
-                }?>"><a href="#">Admin</a></li>
+                }?>"><a href="<?php echo $data['baseUrl'];?>public/admin/index">Admin</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -53,7 +53,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span>&MediumSpace;Edit Profil</a></li>
                         <li class="divider"></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>&MediumSpace;Keluar</a></li>
+                        <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span>&MediumSpace;Keluar</a></li>
                     </ul>
                 </li>
             </ul>

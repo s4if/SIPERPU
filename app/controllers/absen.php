@@ -30,16 +30,16 @@
  * @author s4if
  */
 //ga yakin, ini home besar ato home kecil
-class Home extends Controller {
+class Absen extends Controller {
     
     public function index($name = ''){
-        $user = $this->model('User');
-        $user->name = $name;
+        $siswa = $this->model('Siswa');
+        $data_siswa = $siswa->fetchAllNIS();
         $baseUrl = Config::getBaseUrl();
        
-        $this->view('home/index', ['baseUrl' => $baseUrl ,
-            'name' => $user->name, 
-            'nav-location' => 'admin',
-            'title'=>'Home!']);
+        $this->view('absen/index', ['baseUrl' => $baseUrl ,
+            'nav-location' => 'absen',
+            'title'=>'Absensi Perpustakaan',
+            'data_siswa' => $data_siswa]);
     }
 }
