@@ -50,14 +50,14 @@ require_once '../app/views/core/navbar.php';
                         <label class="col-sm-2 control-label">NIP :</label>
                         <div class="col-sm-6 error">
                             <input type="text" class="form-control" name="nip" 
-                                   placeholder="Masukkan NIP" value="<?php echo empty($nip)?'':$nip;?>" required="true">
+                                   placeholder="Masukkan NIP" value="" required="true">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Nama :</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="nama" 
-                                   placeholder="Masukkan Nama" value="<?php echo empty($nama)?'':$nama;?>" required="true">
+                                   placeholder="Masukkan Nama" value="" required="true">
                         </div>
                     </div>
                     <!-- -->
@@ -66,25 +66,13 @@ require_once '../app/views/core/navbar.php';
                         <div class="col-sm-5">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="jenis_kelamin" value="L" <?php 
-                                    if(!empty($jenis_kelamin)){
-                                        if($jenis_kelamin=='L'){
-                                            echo 'checked';
-                                        }
-                                    }
-                                    ?>>
+                                    <input type="radio" name="jenis_kelamin" value="L">
                                     Laki - Laki
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="jenis_kelamin" value="P" <?php 
-                                    if(!empty($jenis_kelamin)){
-                                        if($jenis_kelamin=='P'){
-                                            echo 'checked';
-                                        }
-                                    }
-                                    ?>>
+                                    <input type="radio" name="jenis_kelamin" value="P">
                                     Perempuan
                                 </label>
                             </div>

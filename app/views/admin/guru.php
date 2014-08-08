@@ -80,7 +80,7 @@ require_once '../app/views/core/navbar.php';
                         <td><?php echo $guru['nama'];?></td>
                         <td><?php echo $guru['jenis_kelamin'];?></td>
                         <td>
-                        <a class="btn btn-xs btn-success" href=""><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a class="btn btn-xs btn-success" href="<?php echo $data['baseUrl'].'public/admin/edit_guru/'.$guru['nip'];?>"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#myModal<?php echo $guru['nip'];?>">
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
@@ -96,7 +96,7 @@ require_once '../app/views/core/navbar.php';
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <a class="btn btn-danger" href="<?php echo $data['baseUrl'].'public/admin/hapus_guru/'.$guru['nip']?>">OK</a>
+                        <a class="btn btn-danger" href="<?php echo $data['baseUrl'].'public/admin/hapus_guru/'.$guru['nip'];?>">OK</a>
                         </div>
                         </div>
                         </div>

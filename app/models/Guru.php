@@ -135,6 +135,29 @@ class Guru extends Model {
 	}
     }
     
+    public function update($nip, $nama, $jenis_kelamin, $nip_lama){
+        $query = $this->db->prepare("UPDATE guru "
+                . "SET nip=?,  "
+                . "nama=?, "
+                . "jenis_kelamin=? "
+                . "where nip=? ;");
+        $query->bindValue(1, $nip);
+        $query->bindValue(2, $nama);
+        $query->bindValue(3, $jenis_kelamin);
+        $query->bindValue(4, $nip_lama);
+        try{
+		
+            $query->execute();
+            $this->nip = $nip;
+            $this->nama = $nama;
+            $this->jenis_kelamin = $jenis_kelamin;
+            return TRUE;
+	}catch(PDOException $e){
+            //die($e->getMessage());
+            return false;
+	}
+    }
+
     public function delete($nip){
         $query = $this->db->prepare("delete from guru where nip = ? ");
         $query->bindValue(1, $nip);

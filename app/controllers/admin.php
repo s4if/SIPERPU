@@ -65,6 +65,7 @@ class Admin extends Controller {
             $guru->jenis_kelamin = $_POST['jenis_kelamin'];
             //ini mohon dicermati untuk hash-nya!
             $guru->password = 'qwerty';
+            
             if($guru->userExists()){
                 $errors[] = 'maaf, NIP sudah dipakai';
             }else{
@@ -83,19 +84,51 @@ class Admin extends Controller {
                 'data_guru' => $data_guru,
                 'notice' => $notice]);
         }  else {
-            $this->view('admin/crud_guru', ['baseUrl' => $baseUrl , 
+            $this->view('admin/tambah_guru', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
                 'title' => 'Home!',
                 'errors' => $errors]);
         }
     }
-
-    public function lihat_guru(){
-        
-    }
     
-    public function edit_guru(){
-        
+    public function edit_guru($nip = ''){
+        $baseUrl = Config::getBaseUrl();
+        $errors = array();
+        $modified = FALSE;
+        $success = false;
+        $guru = $this->model('Guru');
+        if(!empty($_POST['nip'])){
+            $success = $guru->update($_POST['nip'], $_POST['nama'],
+                    $_POST['jenis_kelamin'], $nip);
+            $modified = TRUE;
+        }
+        if($modified && $success){
+            $data_guru = $guru->fetchTable();
+            $notice = array();
+            $notice [] = 'Guru berhasil dimodifikasi';
+            $this->view('admin/guru', ['baseUrl' => $baseUrl , 
+                'nav-location' => 'admin',
+                'title' => 'Home!',
+                'data_guru' => $data_guru,
+                'notice' => $notice]);
+        } elseif ($modified && (!$success)) {
+            $guru->nip = $nip;
+            $guru->fetch();
+            $errors [] = 'maaf, data gagal dimodifikasi';
+            $this->view('admin/edit_guru', ['baseUrl' => $baseUrl , 
+                'nav-location' => 'admin',
+                'title' => 'Home!',
+                'errors' => $errors,
+                'guru' => $guru]);
+        } else {
+            $guru->nip = $nip;
+            $guru->fetch();
+            $this->view('admin/edit_guru', ['baseUrl' => $baseUrl , 
+                'nav-location' => 'admin',
+                'title' => 'Home!',
+                'errors' => $errors,
+                'guru' => $guru]);
+        }
     }
     
     public function hapus_guru($nip = ""){
@@ -122,10 +155,6 @@ class Admin extends Controller {
     }
     
     public function tambah_siswa(){
-        
-    }
-    
-    public function lihat_siswa(){
         
     }
     
