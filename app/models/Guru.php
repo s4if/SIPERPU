@@ -53,6 +53,23 @@ class Guru extends Model {
         }
     }
     
+    public function fetchTable(){
+        
+        $query = $this->db->prepare("select * from guru");
+        
+        try{
+		
+            $query->execute();
+            $data = $query->fetchAll();
+            return $data;
+            
+	}catch(PDOException $e){
+            
+            die($e->getMessage());
+            
+        }
+    }
+    
     public function assign($data = []){
         
         $this->nama = $data['nama'];
@@ -96,5 +113,25 @@ class Guru extends Model {
         } catch (PDOException $e){
             die($e->getMessage());
         }
+    }
+    
+    public function add(){
+         $query = $this->db->prepare("insert into guru "
+                . "SET nip=?, "
+                . "password=?, "
+                . "nama=?, "
+                . "jenis_kelamin=?");
+        $query->bindValue(1, $this->nip);
+        $query->bindValue(2, $this->password);
+        $query->bindValue(3, $this->nama);
+        $query->bindValue(4, $this->jenis_kelamin);
+        try{
+		
+            $query->execute();
+            return TRUE;            
+	}catch(PDOException $e){
+            //die($e->getMessage());
+            return FALSE;
+	}
     }
 }

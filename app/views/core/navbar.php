@@ -53,7 +53,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span>&MediumSpace;Edit Profil</a></li>
                         <li class="divider"></li>
-                        <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span>&MediumSpace;Keluar</a></li>
+                        <li><a href="<?=$data['baseUrl'];?>public/login/logout"><span class="glyphicon glyphicon-log-out"></span>&MediumSpace;Keluar</a></li>
                     </ul>
                 </li>
             </ul>

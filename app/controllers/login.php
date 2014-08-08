@@ -83,7 +83,6 @@ class Login extends Controller {
             $_SESSION['nip'] = $guru->nip;
             $_SESSION['nama'] = $guru->nama;
             $_SESSION['jenis_kelamin'] = $guru->jenis_kelamin;
-            $_SESSION['cp'] = $guru->cp;
             $this->view('home/index', ['nama' => $guru->nama,
                 'baseUrl' => Config::getBaseUrl(),
                 'title' => 'Beranda']);
