@@ -34,9 +34,17 @@ require_once '../app/views/core/navbar.php';
         <div class="col-md-10">
             <div class="container-fluid">
                 <?php if(empty($data['errors']) === false){
-                    echo '<div class="alert alert-danger"><p>' . implode('</p><p>', $data['errors']) . '</p></div>';			
-                } 
-                ?>
+                    ?>
+                <div class="alert alert-warning alert-dismissible">
+                <?php
+                    echo '<button type="button" class="close" data-dismiss="alert"><p>' . 
+                            '<span aria-hidden="true">&times;</span><span class="sr-only">'.
+                            'Close</span></button>'.
+                            implode('</p><p>', $data['errors']) . '</p></span></button>';	
+                    ?>
+                </div>
+                <?php
+                } ?>
                 <form class="form-horizontal" role="form" method="post" action="<?=$data['baseUrl'];?>public/">
                     <div class="form-group error">
                         <label class="col-sm-2 control-label">NIP :</label>

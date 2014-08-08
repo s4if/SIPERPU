@@ -98,8 +98,24 @@ class Admin extends Controller {
         
     }
     
-    public function hapus_guru(){
-        
+    public function hapus_guru($nip = ""){
+        $baseUrl = Config::getBaseUrl();
+        $errors = array();
+        $model = $this->model('Guru');
+        $notice = array();
+        $success = $model->delete($nip);
+        if($success){
+            $notice [] = 'Guru berhasil dihapus';
+        }else{
+            $errors [] = 'maaf, guru gagal dihapus';
+        }
+        $data_guru = $model->fetchTable();
+        $this->view('admin/guru', ['baseUrl' => $baseUrl , 
+            'nav-location' => 'admin',
+            'title' => 'Home!',
+            'data_guru' => $data_guru,
+            'notice' => $notice,
+            'errors' => $errors]);
     }
     public function siswa(){
         

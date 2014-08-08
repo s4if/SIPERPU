@@ -34,9 +34,29 @@ require_once '../app/views/core/navbar.php';
         <div class="col-md-10">
             <div class="container-fluid">
                 <?php if(empty($data['notice']) === false){
-                    echo '<div class="alert alert-success"><p>' . implode('</p><p>', $data['notice']) . '</p></div>';			
-                } 
-                ?>
+                    ?>
+                <div class="alert alert-success alert-dismissible">
+                <?php
+                    echo '<button type="button" class="close" data-dismiss="alert"><p>' . 
+                            '<span aria-hidden="true">&times;</span><span class="sr-only">'.
+                            'Close</span></button>'.
+                            implode('</p><p>', $data['notice']) . '</p>';	
+                    ?>
+                </div>
+                <?php
+                }
+                if(empty($data['errors']) === false){
+                    ?>
+                <div class="alert alert-warning alert-dismissible">
+                <?php
+                    echo '<button type="button" class="close" data-dismiss="alert"><p>' . 
+                            '<span aria-hidden="true">&times;</span><span class="sr-only">'.
+                            'Close</span></button>'.
+                            implode('</p><p>', $data['errors']) . '</p></span></button>';	
+                    ?>
+                </div>
+                <?php
+                } ?>
                 <a href="<?=$data['baseUrl'];?>public/admin/tambah_guru" class="btn btn-default btn-xs">
                     <span class="glyphicon glyphicon-plus"></span>
                     Tambah
@@ -76,7 +96,7 @@ require_once '../app/views/core/navbar.php';
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <a class="btn btn-danger" href="">OK</a>
+                        <a class="btn btn-danger" href="<?php echo $data['baseUrl'].'public/admin/hapus_guru/'.$guru['nip']?>">OK</a>
                         </div>
                         </div>
                         </div>

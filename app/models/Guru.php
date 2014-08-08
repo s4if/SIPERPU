@@ -134,4 +134,19 @@ class Guru extends Model {
             return FALSE;
 	}
     }
+    
+    public function delete($nip){
+        $query = $this->db->prepare("delete from guru where nip = ? ");
+        $query->bindValue(1, $nip);
+        
+        try{
+		
+            $query->execute();
+            return true;
+            
+	}catch(PDOException $e){
+            //die($e->getMessage());
+            return false;
+        }
+    }
 }
