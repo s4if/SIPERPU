@@ -115,19 +115,23 @@ class Guru extends Model {
         }
     }
     
-    public function add(){
+    public function add($nip, $password, $nama, $jenis_kelamin){
          $query = $this->db->prepare("insert into guru "
                 . "SET nip=?, "
                 . "password=?, "
                 . "nama=?, "
                 . "jenis_kelamin=?");
-        $query->bindValue(1, $this->nip);
-        $query->bindValue(2, $this->password);
-        $query->bindValue(3, $this->nama);
-        $query->bindValue(4, $this->jenis_kelamin);
+        $query->bindValue(1, $nip);
+        $query->bindValue(2, $password);
+        $query->bindValue(3, $nama);
+        $query->bindValue(4, $jenis_kelamin);
         try{
 		
             $query->execute();
+            $this->nip = $nip;
+            $this->password = $password;
+            $this->nama = $nama;
+            $this->jenis_kelamin = $jenis_kelamin;
             return TRUE;            
 	}catch(PDOException $e){
             //die($e->getMessage());

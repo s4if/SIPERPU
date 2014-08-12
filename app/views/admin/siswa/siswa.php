@@ -57,7 +57,7 @@ require_once '../app/views/core/navbar.php';
                 </div>
                 <?php
                 } ?>
-                <a href="<?=$data['baseUrl'];?>public/admin/tambah_guru" class="btn btn-default btn-xs">
+                <a href="<?=$data['baseUrl'];?>public/admin/tambah_siswa" class="btn btn-default btn-xs">
                     <span class="glyphicon glyphicon-plus"></span>
                     Tambah
                 </a>
@@ -66,37 +66,43 @@ require_once '../app/views/core/navbar.php';
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <td>NIP</td>
+                            <td>NIS</td>
                             <td>Nama</td>
                             <td>P/L</td>
+                            <td>Kelas</td>
+                            <td>Jurusan</td>
+                            <td>Paralel</td>
                             <td>Aksi</td>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($data['data_guru'] as $guru){?>
+                        foreach ($data['data_siswa'] as $siswa){?>
                         <tr>
-                        <td><?php echo $guru['nip'];?></td>
-                        <td><?php echo $guru['nama'];?></td>
-                        <td><?php echo $guru['jenis_kelamin'];?></td>
+                        <td><?php echo $siswa['nis'];?></td>
+                        <td><?php echo $siswa['nama'];?></td>
+                        <td><?php echo $siswa['jenis_kelamin'];?></td>
+                        <td><?php echo $siswa['kelas'];?></td>
+                        <td><?php echo $siswa['jurusan'];?></td>
+                        <td><?php echo $siswa['paralel'];?></td>
                         <td>
-                        <a class="btn btn-xs btn-success" href="<?php echo $data['baseUrl'].'public/admin/edit_guru/'.$guru['nip'];?>"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#myModal<?php echo $guru['nip'];?>">
+                        <a class="btn btn-xs btn-success" href="<?php echo $data['baseUrl'].'public/admin/edit_siswa/'.$siswa['nis'];?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#myModal<?php echo $siswa['nis'];?>">
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
-                        <div class="modal fade" id="myModal<?php echo $guru['nip'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$guru['nip'].'" aria-hidden="true">
+                        <div class="modal fade" id="myModal<?php echo $siswa['nis'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$siswa['nis'].'" aria-hidden="true">
                         <div class="modal-dialog">
                         <div class="modal-content">
                         <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel<?php echo $guru['nip'];?>">Konfirmasi</h4>
+                        <h4 class="modal-title" id="myModalLabel<?php echo $siswa['nis'];?>">Konfirmasi</h4>
                         </div>
                         <div class="modal-body">
-                        Apakah Anda Yakin Untuk Menghapus Guru dengan NIP = <?php echo $guru['nip'];?>
+                        Apakah Anda Yakin Untuk Menghapus Data Siswa dengan NIP = <?php echo $siswa['nis'];?>
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <a class="btn btn-danger" href="<?php echo $data['baseUrl'].'public/admin/hapus_guru/'.$guru['nip'];?>">OK</a>
+                        <a class="btn btn-danger" href="<?php echo $data['baseUrl'].'public/admin/hapus_siswa/'.$siswa['nis'];?>">OK</a>
                         </div>
                         </div>
                         </div>
@@ -111,4 +117,3 @@ require_once '../app/views/core/navbar.php';
         </div>
     </div>
 </div>
-

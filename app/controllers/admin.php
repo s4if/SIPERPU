@@ -48,7 +48,7 @@ class Admin extends Controller {
         $data_guru = $model->fetchTable();
         $baseUrl = Config::getBaseUrl();
         
-        $this->view('admin/guru', ['baseUrl' => $baseUrl , 
+        $this->view('admin/guru/guru', ['baseUrl' => $baseUrl , 
             'nav-location' => 'admin',
             'title' => 'Home!',
             'data_guru' => $data_guru]);
@@ -61,15 +61,12 @@ class Admin extends Controller {
         $guru = $this->model('Guru');
         if(!empty($_POST['nip'])){
             $guru->nip = $_POST['nip'];
-            $guru->nama = $_POST['nama'];
-            $guru->jenis_kelamin = $_POST['jenis_kelamin'];
-            //ini mohon dicermati untuk hash-nya!
-            $guru->password = 'qwerty';
             
             if($guru->userExists()){
                 $errors[] = 'maaf, NIP sudah dipakai';
             }else{
-                $success = $guru->add();
+                //ini mohon dicermati untuk paswordnya nge-hash-nya gmana!?
+                $success = $guru->add($_POST['nip'], 'qwerty', $_POST['nama'], $_POST['jenis_kelamin']);
             }
         }
         if($success){
@@ -77,14 +74,14 @@ class Admin extends Controller {
             $data_guru = $model->fetchTable();
             $baseUrl = Config::getBaseUrl();
             $notice = array();
-            $notice [] = 'Guru berhasil ditambahkan';
-            $this->view('admin/guru', ['baseUrl' => $baseUrl , 
+            $notice [] = 'Data Guru Berhasil Ditambahkan';
+            $this->view('admin/guru/guru', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
                 'title' => 'Home!',
                 'data_guru' => $data_guru,
                 'notice' => $notice]);
         }  else {
-            $this->view('admin/tambah_guru', ['baseUrl' => $baseUrl , 
+            $this->view('admin/guru/tambah_guru', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
                 'title' => 'Home!',
                 'errors' => $errors]);
@@ -105,8 +102,8 @@ class Admin extends Controller {
         if($modified && $success){
             $data_guru = $guru->fetchTable();
             $notice = array();
-            $notice [] = 'Guru berhasil dimodifikasi';
-            $this->view('admin/guru', ['baseUrl' => $baseUrl , 
+            $notice [] = 'Data Guru Berhasil Dimodifikasi';
+            $this->view('admin/guru/guru', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
                 'title' => 'Home!',
                 'data_guru' => $data_guru,
@@ -114,8 +111,8 @@ class Admin extends Controller {
         } elseif ($modified && (!$success)) {
             $guru->nip = $nip;
             $guru->fetch();
-            $errors [] = 'maaf, data gagal dimodifikasi';
-            $this->view('admin/edit_guru', ['baseUrl' => $baseUrl , 
+            $errors [] = 'maaf, Data Guru Gagal Dimodifikasi';
+            $this->view('admin/guru/edit_guru', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
                 'title' => 'Home!',
                 'errors' => $errors,
@@ -123,7 +120,7 @@ class Admin extends Controller {
         } else {
             $guru->nip = $nip;
             $guru->fetch();
-            $this->view('admin/edit_guru', ['baseUrl' => $baseUrl , 
+            $this->view('admin/guru/edit_guru', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
                 'title' => 'Home!',
                 'errors' => $errors,
@@ -138,12 +135,12 @@ class Admin extends Controller {
         $notice = array();
         $success = $model->delete($nip);
         if($success){
-            $notice [] = 'Guru berhasil dihapus';
+            $notice [] = 'Data Guru berhasil dihapus';
         }else{
-            $errors [] = 'maaf, guru gagal dihapus';
+           $errors [] = 'maaf, data guru gagal dihapus';
         }
         $data_guru = $model->fetchTable();
-        $this->view('admin/guru', ['baseUrl' => $baseUrl , 
+        $this->view('admin/guru/guru', ['baseUrl' => $baseUrl , 
             'nav-location' => 'admin',
             'title' => 'Home!',
             'data_guru' => $data_guru,
@@ -151,18 +148,115 @@ class Admin extends Controller {
             'errors' => $errors]);
     }
     public function siswa(){
+        $model = $this->model('Siswa');
+        $data_siswa = $model->fetchTable();
+        $baseUrl = Config::getBaseUrl();
         
+        $this->view('admin/siswa/siswa', ['baseUrl' => $baseUrl , 
+            'nav-location' => 'admin',
+            'title' => 'Home!',
+            'data_siswa' => $data_siswa]);
     }
     
     public function tambah_siswa(){
-        
+        $baseUrl = Config::getBaseUrl();
+        $errors = array();
+        $success = false;
+        $siswa = $this->model('Siswa');
+        if(!empty($_POST['nis'])){
+            $siswa->nip = $_POST['nis'];
+            
+            if($siswa->userExists()){
+                $errors[] = 'maaf, NIS sudah dipakai';
+            }else{
+                $success = $siswa->add($_POST['nis'],
+                        $_POST['nama'],
+                        $_POST['kelas'],
+                        $_POST['jurusan'],
+                        $_POST['paralel'],
+                        $_POST['jenis_kelamin']);
+            }
+        }
+        if($success){
+            $data_siswa = $siswa->fetchTable();
+            $baseUrl = Config::getBaseUrl();
+            $notice = array();
+            $notice [] = 'Data Siswa berhasil ditambahkan';
+            $this->view('admin/siswa/siswa', ['baseUrl' => $baseUrl , 
+                'nav-location' => 'admin',
+                'title' => 'Home!',
+                'data_siswa' => $data_siswa,
+                'notice' => $notice]);
+        }  else {
+            $this->view('admin/siswa/tambah_siswa', ['baseUrl' => $baseUrl , 
+                'nav-location' => 'admin',
+                'title' => 'Home!',
+                'errors' => $errors]);
+        }
     }
     
-    public function edit_siswa(){
-        
+    public function edit_siswa($nis = ''){
+        $baseUrl = Config::getBaseUrl();
+        $errors = array();
+        $modified = FALSE;
+        $success = false;
+        $siswa = $this->model('Siswa');
+        if(!empty($_POST['nis'])){
+            $success = $siswa->update($_POST['nis'],
+                        $_POST['nama'],
+                        $_POST['kelas'],
+                        $_POST['jurusan'],
+                        $_POST['paralel'],
+                        $_POST['jenis_kelamin'],
+                        $nis);
+            $modified = TRUE;
+        }
+        if($modified && $success){
+            $data_siswa = $siswa->fetchTable();
+            $notice = array();
+            $notice [] = 'Data Siswa Berhasil Dimodifikasi';
+            $this->view('admin/siswa/siswa', ['baseUrl' => $baseUrl , 
+                'nav-location' => 'admin',
+                'title' => 'Home!',
+                'data_siswa' => $data_siswa,
+                'notice' => $notice]);
+        } elseif ($modified && (!$success)) {
+            $siswa->nis = $nis;
+            $siswa->fetch();
+            $errors [] = 'maaf, Data Siswa Gagal Dimodifikasi';
+            $this->view('admin/siswa/edit_siswa', ['baseUrl' => $baseUrl , 
+                'nav-location' => 'admin',
+                'title' => 'Home!',
+                'errors' => $errors,
+                'siswa' => $siswa]);
+        } else {
+            $siswa->nis = $nis;
+            $siswa->fetch();
+            $this->view('admin/siswa/edit_siswa', ['baseUrl' => $baseUrl , 
+                'nav-location' => 'admin',
+                'title' => 'Home!',
+                'errors' => $errors,
+                'siswa' => $siswa]);
+        }
     }
     
-    public function hapus_siswa(){
-        
+    public function hapus_siswa($nis = ''){
+        $baseUrl = Config::getBaseUrl();
+        $errors = array();
+        $model = $this->model('Siswa');
+        $notice = array();
+        $success = $model->delete($nis);
+        if($success){
+            $notice [] = 'Data siswa berhasil dihapus';
+        }else{
+            $errors [] = 'maaf, data siswa gagal dihapus';
+        }
+        $data_siswa = $model->fetchTable();
+        $this->view('admin/siswa/siswa', ['baseUrl' => $baseUrl , 
+            'nav-location' => 'admin',
+            'title' => 'Home!',
+            'data_siswa' => $data_siswa,
+            'notice' => $notice,
+            'errors' => $errors]);
     }
 }
