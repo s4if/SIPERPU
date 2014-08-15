@@ -146,28 +146,11 @@ class Siswa extends Model {
 	}
     }
     
-    public function fetchAllNIS(){
-        
-        $query = $this->db->prepare("select nis from siswa");
-        
-        try{
-		
-            $query->execute();
-            $data = $query->fetchAll();
-            return $data;
-            
-	}catch(PDOException $e){
-            
-            die($e->getMessage());
-            
-        }
-    }
-    
     public function userExists() {
         
         $strquery = "SELECT COUNT(`nis`) FROM `siswa` WHERE `nis`= ?";
         $query = $this->db->prepare($strquery);
-        $query->bindValue(1, $this->nip);
+        $query->bindValue(1, $this->nis);
 
         try{
 

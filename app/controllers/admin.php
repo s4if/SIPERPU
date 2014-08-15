@@ -33,14 +33,7 @@
 class Admin extends Controller {
     
     public function index($name = ''){
-        $user = $this->model('Guru');
-        $user->name = $name;
-        $baseUrl = Config::getBaseUrl();
-       
-        $this->view('admin/index', ['baseUrl' => $baseUrl ,
-            'nav-location' => 'admin',
-            'title'=>'Home!',
-            'name' => $user->name]);
+        $this->guru();
     }
     
     public function guru(){
@@ -48,9 +41,9 @@ class Admin extends Controller {
         $data_guru = $model->fetchTable();
         $baseUrl = Config::getBaseUrl();
         
-        $this->view('admin/guru/guru', ['baseUrl' => $baseUrl , 
+        $this->view('admin/guru/index', ['baseUrl' => $baseUrl , 
             'nav-location' => 'admin',
-            'title' => 'Home!',
+            'title' => 'Tabel Guru',
             'data_guru' => $data_guru]);
     }
     
@@ -75,15 +68,15 @@ class Admin extends Controller {
             $baseUrl = Config::getBaseUrl();
             $notice = array();
             $notice [] = 'Data Guru Berhasil Ditambahkan';
-            $this->view('admin/guru/guru', ['baseUrl' => $baseUrl , 
+            $this->view('admin/guru/index', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
-                'title' => 'Home!',
+                'title' => 'Tabel Guru',
                 'data_guru' => $data_guru,
                 'notice' => $notice]);
         }  else {
             $this->view('admin/guru/tambah_guru', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
-                'title' => 'Home!',
+                'title' => 'Tambah Guru',
                 'errors' => $errors]);
         }
     }
@@ -103,9 +96,9 @@ class Admin extends Controller {
             $data_guru = $guru->fetchTable();
             $notice = array();
             $notice [] = 'Data Guru Berhasil Dimodifikasi';
-            $this->view('admin/guru/guru', ['baseUrl' => $baseUrl , 
+            $this->view('admin/guru/index', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
-                'title' => 'Home!',
+                'title' => 'Tabel Guru',
                 'data_guru' => $data_guru,
                 'notice' => $notice]);
         } elseif ($modified && (!$success)) {
@@ -114,7 +107,7 @@ class Admin extends Controller {
             $errors [] = 'maaf, Data Guru Gagal Dimodifikasi';
             $this->view('admin/guru/edit_guru', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
-                'title' => 'Home!',
+                'title' => 'Edit Guru',
                 'errors' => $errors,
                 'guru' => $guru]);
         } else {
@@ -122,7 +115,7 @@ class Admin extends Controller {
             $guru->fetch();
             $this->view('admin/guru/edit_guru', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
-                'title' => 'Home!',
+                'title' => 'Edit GUru',
                 'errors' => $errors,
                 'guru' => $guru]);
         }
@@ -140,9 +133,9 @@ class Admin extends Controller {
            $errors [] = 'maaf, data guru gagal dihapus';
         }
         $data_guru = $model->fetchTable();
-        $this->view('admin/guru/guru', ['baseUrl' => $baseUrl , 
+        $this->view('admin/guru/index', ['baseUrl' => $baseUrl , 
             'nav-location' => 'admin',
-            'title' => 'Home!',
+            'title' => 'Tabel Guru',
             'data_guru' => $data_guru,
             'notice' => $notice,
             'errors' => $errors]);
@@ -152,9 +145,9 @@ class Admin extends Controller {
         $data_siswa = $model->fetchTable();
         $baseUrl = Config::getBaseUrl();
         
-        $this->view('admin/siswa/siswa', ['baseUrl' => $baseUrl , 
+        $this->view('admin/siswa/index', ['baseUrl' => $baseUrl , 
             'nav-location' => 'admin',
-            'title' => 'Home!',
+            'title' => 'Tabel Siswa',
             'data_siswa' => $data_siswa]);
     }
     
@@ -182,15 +175,15 @@ class Admin extends Controller {
             $baseUrl = Config::getBaseUrl();
             $notice = array();
             $notice [] = 'Data Siswa berhasil ditambahkan';
-            $this->view('admin/siswa/siswa', ['baseUrl' => $baseUrl , 
+            $this->view('admin/siswa/index', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
-                'title' => 'Home!',
+                'title' => 'Tabel Siswa',
                 'data_siswa' => $data_siswa,
                 'notice' => $notice]);
         }  else {
             $this->view('admin/siswa/tambah_siswa', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
-                'title' => 'Home!',
+                'title' => 'Tambah Siswa',
                 'errors' => $errors]);
         }
     }
@@ -215,9 +208,9 @@ class Admin extends Controller {
             $data_siswa = $siswa->fetchTable();
             $notice = array();
             $notice [] = 'Data Siswa Berhasil Dimodifikasi';
-            $this->view('admin/siswa/siswa', ['baseUrl' => $baseUrl , 
+            $this->view('admin/siswa/index', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
-                'title' => 'Home!',
+                'title' => 'Tabel Siswa',
                 'data_siswa' => $data_siswa,
                 'notice' => $notice]);
         } elseif ($modified && (!$success)) {
@@ -226,7 +219,7 @@ class Admin extends Controller {
             $errors [] = 'maaf, Data Siswa Gagal Dimodifikasi';
             $this->view('admin/siswa/edit_siswa', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
-                'title' => 'Home!',
+                'title' => 'Edit Siswa',
                 'errors' => $errors,
                 'siswa' => $siswa]);
         } else {
@@ -234,7 +227,7 @@ class Admin extends Controller {
             $siswa->fetch();
             $this->view('admin/siswa/edit_siswa', ['baseUrl' => $baseUrl , 
                 'nav-location' => 'admin',
-                'title' => 'Home!',
+                'title' => 'Edit SIswa',
                 'errors' => $errors,
                 'siswa' => $siswa]);
         }
@@ -252,9 +245,9 @@ class Admin extends Controller {
             $errors [] = 'maaf, data siswa gagal dihapus';
         }
         $data_siswa = $model->fetchTable();
-        $this->view('admin/siswa/siswa', ['baseUrl' => $baseUrl , 
+        $this->view('admin/siswa/index', ['baseUrl' => $baseUrl , 
             'nav-location' => 'admin',
-            'title' => 'Home!',
+            'title' => 'Tabel Siswa',
             'data_siswa' => $data_siswa,
             'notice' => $notice,
             'errors' => $errors]);

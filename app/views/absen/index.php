@@ -26,30 +26,60 @@
 
 require_once '../app/views/core/navbar.php';
 ?>
-<div class="container">
-    <div class="col-md-4 col-md-offset-4">
-        <div class="panel panel-info">
-            <div class="panel-heading"><h3 class="panel-title"><strong>Silahkan Masukkan NIS</strong></h3></div>
-            <div class="panel-body">
-                <form role="form" method="post" action="<?=$data['baseUrl']?>public/">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="NIS" 
-                               name="nip" value="<?php echo isset($data['nip'])? $data['nip']:'';?>" 
-                               required="true" list="listSiswa">
-                        <datalist id="listSiswa">
-                            <?php if(empty($data['data_siswa']) === false){
-                                foreach ($data['data_siswa'] as $siswa){
-                                    echo '<option value="'.$siswa[0].'">';
-                                }
-                            } 
-                            ?>
-                        </datalist>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <p class="text-center"><?=$data['tanggal']?></p>
+        </div>
+        <div class="col-md-offset-4 col-md-4">
+            <p class="text-center">Lorem Ipsum</p>
+        </div>
+        <div class="col-md-12">
+            &InvisibleComma;
+        </div>
+        <div class="col-md-offset-4 col-md-5">
+            <form class="form-inline" role="form" method="post" action="<?=$data['baseUrl'];?>translator.php">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">NIS</div>
+                        <input type="text" class="form-control" name="param" placeholder="Masukkan NIS">
+                        <input type="text" class="form-control hidden" name="url" value="absen/tambah">
                     </div>
-                    <div class="form-group form-horizontal">
-                        <input type="text" class="form-control col-xs-4 hidden" name="url" value="login/login">
-                        <button type="submit" class="btn btn-sm btn-default col-xs-4">Masuk</button>
-                    </div>
-                </form>
+                </div>
+                <button type="submit" class="btn btn-default">OK</button>
+            </form>
+        </div>
+        <div class="col-md-12">
+            &InvisibleComma;
+        </div>
+        <div class="col-md-offset-1 col-md-10">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>NIS</td>
+                            <td>Nama</td>
+                            <td>P/L</td>
+                            <td>Kelas</td>
+                            <td>Jurusan</td>
+                            <td>Paralel</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($data['data_siswa'] as $siswa){?>
+                        <tr>
+                        <td><?php echo $siswa['nis'];?></td>
+                        <td><?php echo $siswa['nama'];?></td>
+                        <td><?php echo $siswa['jenis_kelamin'];?></td>
+                        <td><?php echo $siswa['kelas'];?></td>
+                        <td><?php echo $siswa['jurusan'];?></td>
+                        <td><?php echo $siswa['paralel'];?></td>
+                        </tr>
+                        <?php
+                        }?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

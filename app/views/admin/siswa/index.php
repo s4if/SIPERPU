@@ -98,7 +98,7 @@ require_once '../app/views/core/navbar.php';
                         <h4 class="modal-title" id="myModalLabel<?php echo $siswa['nis'];?>">Konfirmasi</h4>
                         </div>
                         <div class="modal-body">
-                        Apakah Anda Yakin Untuk Menghapus Data Siswa dengan NIP = <?php echo $siswa['nis'];?>
+                        Apakah Anda Yakin Untuk Menghapus Data Siswa dengan NIS = <?php echo $siswa['nis'];?>
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

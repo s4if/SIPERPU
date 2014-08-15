@@ -32,14 +32,33 @@
 //ga yakin, ini home besar ato home kecil
 class Absen extends Controller {
     
-    public function index($name = ''){
-        $siswa = $this->model('Siswa');
-        $data_siswa = $siswa->fetchAllNIS();
+    public function index(){
+        $presensi = $this->model('Presensi');
         $baseUrl = Config::getBaseUrl();
-       
+        $tanggal = date('l, d M Y');
+        $data_siswa = $presensi->fetchPresensi(date("Y-m-d"));
         $this->view('absen/index', ['baseUrl' => $baseUrl ,
-            'nav-location' => 'absen',
+            'nav-location' => 'absensi',
             'title'=>'Absensi Perpustakaan',
-            'data_siswa' => $data_siswa]);
+            'data_siswa' => $data_siswa,
+            'tanggal' => $tanggal]);
+    }
+    
+    public function tambah($nis = ''){
+        $baseUrl = Config::getBaseUrl();
+        $siswa = $this->model("Siswa");
+        $siswa->nis = $nis; //$_POST['nis'];
+        if($siswa->userExists()){
+            $siswa->fetch();
+            $this->view('absen/tambah', ['baseUrl' => $baseUrl ,
+                'nav-location' => 'absensi',
+                'title'=>'Absensi Perpustakaan',
+                'siswa' => $siswa]);
+        }  else {
+            $this->view('absen/tidak_ditemukan', ['baseUrl' => $baseUrl ,
+                'nav-location' => 'absensi',
+                'title'=>'Absensi Perpustakaan',
+                'siswa' => $siswa]);
+        }
     }
 }
