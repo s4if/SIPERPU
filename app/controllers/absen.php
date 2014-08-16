@@ -36,12 +36,14 @@ class Absen extends Controller {
         $presensi = $this->model('Presensi');
         $baseUrl = Config::getBaseUrl();
         $tanggal = date('l, d M Y');
+        $waktu = date("H:i:s");
         $data_siswa = $presensi->fetchPresensi(date("Y-m-d"));
         $this->view('absen/index', ['baseUrl' => $baseUrl ,
             'nav-location' => 'absensi',
             'title'=>'Absensi Perpustakaan',
             'data_siswa' => $data_siswa,
-            'tanggal' => $tanggal]);
+            'tanggal' => $tanggal,
+            'waktu' => $waktu]);
     }
     
     public function tambah($nis = ''){
@@ -55,10 +57,67 @@ class Absen extends Controller {
                 'title'=>'Absensi Perpustakaan',
                 'siswa' => $siswa]);
         }  else {
-            $this->view('absen/tidak_ditemukan', ['baseUrl' => $baseUrl ,
+            $error = 'Maaf, siswa dengan NIS : '.$siswa->nis." Tidak ditemukan.";
+            $this->view('absen/error', ['baseUrl' => $baseUrl ,
                 'nav-location' => 'absensi',
                 'title'=>'Absensi Perpustakaan',
-                'siswa' => $siswa]);
+                'error'=>$error]);
         }
+    }
+    
+    public function konfirmasi($nis = ''){
+        $error = array();
+        $notice = array();
+        $presensi = $this->model('Presensi');
+        $baseUrl = Config::getBaseUrl();
+        $tanggal = date('l, d M Y');
+        $tgl_input = date("Y-m-d");
+        $waktu = date("H:i:s");
+        if($presensi->exists($nis, $tgl_input)){
+            $error [] = 'Maaf, Anda sudah absen hari ini';
+        }else{
+            if($presensi->add($nis, $tgl_input, $_SESSION['nip'], $waktu)){
+                $notice[] = 'Presensi berhasi dicatat.';
+            }else{
+                $error[] = 'Maaf, Terjadi Kesalahan';
+            }
+        }
+        $data_siswa = $presensi->fetchPresensi(date("Y-m-d"));
+        $this->view('absen/index', ['baseUrl' => $baseUrl ,
+            'nav-location' => 'absensi',
+            'title'=>'Absensi Perpustakaan',
+            'data_siswa' => $data_siswa,
+            'tanggal' => $tanggal,
+            'waktu' => $waktu,
+            'notice' => $notice,
+            'errors' => $error]);
+    }
+    
+    public function hapus($nis = ''){
+        $error = array();
+        $notice = array();
+        $presensi = $this->model('Presensi');
+        $baseUrl = Config::getBaseUrl();
+        $tanggal = date('l, d M Y');
+        $tgl_input = date("Y-m-d");
+        $waktu = date("H:i:s");
+        if(!$presensi->exists($nis, $tgl_input)){
+            $error[] = 'Maaf, Siswa dengan NIS : '.$nis.' belum presensi.';
+        }else{
+            if($presensi->delete($nis, $tgl_input)){
+                $notice[] = 'Presensi berhasi dihapus.';
+            }else{
+                $error = 'Maaf, Terjadi Kesalahan';
+            }
+        }
+        $data_siswa = $presensi->fetchPresensi(date("Y-m-d"));
+        $this->view('absen/index', ['baseUrl' => $baseUrl ,
+            'nav-location' => 'absensi',
+            'title'=>'Absensi Perpustakaan',
+            'data_siswa' => $data_siswa,
+            'tanggal' => $tanggal,
+            'waktu' => $waktu,
+            'notice' => $notice,
+            'errors' => $error]);
     }
 }

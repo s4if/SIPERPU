@@ -32,10 +32,33 @@ require_once '../app/views/core/navbar.php';
             <p class="text-center"><?=$data['tanggal']?></p>
         </div>
         <div class="col-md-offset-4 col-md-4">
-            <p class="text-center">Lorem Ipsum</p>
+            <p class="text-center"><?=$data['waktu']?></p>
         </div>
         <div class="col-md-12">
-            &InvisibleComma;
+            <?php if(empty($data['notice']) === false){
+                    ?>
+                <div class="alert alert-success alert-dismissible">
+                <?php
+                    echo '<button type="button" class="close" data-dismiss="alert"><p>' . 
+                            '<span aria-hidden="true">&times;</span><span class="sr-only">'.
+                            'Close</span></button>'.
+                            implode('</p><p>', $data['notice']) . '</p>';	
+                    ?>
+                </div>
+                <?php
+                }
+                if(empty($data['errors']) === false){
+                    ?>
+                <div class="alert alert-warning alert-dismissible">
+                <?php
+                    echo '<button type="button" class="close" data-dismiss="alert"><p>' . 
+                            '<span aria-hidden="true">&times;</span><span class="sr-only">'.
+                            'Close</span></button>'.
+                            implode('</p><p>', $data['errors']) . '</p></span></button>';	
+                    ?>
+                </div>
+                <?php
+                }?>
         </div>
         <div class="col-md-offset-4 col-md-5">
             <form class="form-inline" role="form" method="post" action="<?=$data['baseUrl'];?>translator.php">
@@ -63,6 +86,7 @@ require_once '../app/views/core/navbar.php';
                             <td>Kelas</td>
                             <td>Jurusan</td>
                             <td>Paralel</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,6 +99,28 @@ require_once '../app/views/core/navbar.php';
                         <td><?php echo $siswa['kelas'];?></td>
                         <td><?php echo $siswa['jurusan'];?></td>
                         <td><?php echo $siswa['paralel'];?></td>
+                        <td>
+                        <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#myModal<?php echo $siswa['nis'];?>">
+                            <span class="glyphicon glyphicon-remove"></span>&nbsp;Hapus
+                        </a>
+                        <div class="modal fade" id="myModal<?php echo $siswa['nis'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$siswa['nis'].'" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel<?php echo $siswa['nis'];?>">Konfirmasi</h4>
+                        </div>
+                        <div class="modal-body">
+                        Apakah Anda Yakin Untuk Menghapus Presensi Siswa dengan NIS = <?php echo $siswa['nis'];?>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                        <a class="btn btn-danger" href="<?php echo $data['baseUrl'].'public/absen/hapus/'.$siswa['nis'];?>">OK</a>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </td>
                         </tr>
                         <?php
                         }?>

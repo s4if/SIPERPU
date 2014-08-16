@@ -34,7 +34,7 @@ require_once '../app/views/core/navbar.php';
                 <h3><p class="text-center"><span class="glyphicon glyphicon-align-center glyphicon-warning-sign"></span></p></h3>
             </div>
             <div class="panel-body">
-                <h3>Maaf, siswa dengan NIS : [<?=$data['siswa']->nis?>] Tidak Ditemukan.</h3>
+                <h3><?=$data['error']?></h3>
             </div>
             <div class="panel-footer">
                 <a class="btn btn-sm btn-warning" href="<?=$data['baseUrl'];?>public/absen/index">OK</a>

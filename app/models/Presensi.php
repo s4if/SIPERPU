@@ -38,7 +38,7 @@ class Presensi extends Model {
                 . "siswa.paralel as 'paralel', "
                 . "siswa.jenis_kelamin as 'jenis_kelamin' "
                 . "from siswa cross join absen using (nis) "
-                . "where absen.tanggal = ?;");
+                . "where absen.tanggal = ? order by absen.waktu asc;");
         $query->bindValue(1, $tanggal);
         try{
             
@@ -50,6 +50,65 @@ class Presensi extends Model {
             
             die($e->getMessage());
             
+        }
+    }
+    
+    public function add($nis, $tanggal, $nip, $waktu){
+        $query = $this->db->prepare("insert into absen "
+                . "SET nis=?, "
+                . "tanggal=?, "
+                . "nip=?, "
+                . "waktu=?");
+        $query->bindValue(1, $nis);
+        $query->bindValue(2, $tanggal);
+        $query->bindValue(3, $nip);
+        $query->bindValue(4, $waktu);
+        try{
+		
+            $query->execute();
+            return TRUE;
+            
+        }  catch (PDOException $e){
+            return false;
+        }
+    }
+    
+    public function exists($nis, $tanggal) {
+        
+        $strquery = "SELECT COUNT(`nis`) FROM `absen` WHERE `nis`= ? and tanggal = ?";
+        $query = $this->db->prepare($strquery);
+        $query->bindValue(1, $nis);
+        $query->bindValue(2, $tanggal);
+
+        try{
+
+            $query->execute();
+            $rows = $query->fetchColumn();
+
+            if($rows == 1){
+                return true;
+            }else{
+                return false;
+            }
+
+        } catch (PDOException $e){
+            die($e->getMessage());
+        }
+    }
+    
+    public function delete($nis, $tanggal){
+        $query = $this->db->prepare("delete from absen where nis = ? and tanggal = ?");
+        $query->bindValue(1, $nis);
+        $query->bindValue(2, $tanggal);
+        
+        try{
+		
+            $query->execute();
+            return true;
+            
+	}catch(PDOException $e){
+            //die($e->getMessage());
+            return false;
         }
     }
 }
