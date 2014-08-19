@@ -1,0 +1,13 @@
+{
+    "name": "s4if/sa-pu-skanida",
+    "require": {
+        "goodby/csv": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Saiful Habib",
+            "email": "sangpejuang32@gmail.com"
+        }
+    ]
+}
