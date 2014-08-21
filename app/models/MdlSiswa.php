@@ -29,7 +29,7 @@
  *
  * @author s4if
  */
-class Siswa extends Model {
+class MdlSiswa extends Model {
     public $nis;
     public $nama;
     public $kelas;

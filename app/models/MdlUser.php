@@ -29,7 +29,7 @@
  *
  * @author s4if
  */
-class User {
+class MdlUser {
     
     public $name;
     public $password;

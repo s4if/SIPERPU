@@ -29,7 +29,7 @@
  *
  * @author s4if
  */
-class Guru extends Model {
+class MdlGuru extends Model {
     public $nip;
     public $nama;
     public $password;

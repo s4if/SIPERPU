@@ -32,8 +32,9 @@
 class Controller {
 
     public function model($model){
-        require_once '../app/models/'.$model.'.php';
-        return new $model();
+        require_once '../app/models/Mdl'.$model.'.php';
+        $modelObj = 'mdl'.$model;
+        return new $modelObj();
     }
     
     public function view($view, $data = []){

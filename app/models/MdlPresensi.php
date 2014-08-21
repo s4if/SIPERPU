@@ -29,7 +29,7 @@
  *
  * @author s4if
  */
-class Presensi extends Model {
+class MdlPresensi extends Model {
     public function fetchPresensi($tanggal){
         
         $query = $this->db->prepare("select siswa.nis as 'nis', "
