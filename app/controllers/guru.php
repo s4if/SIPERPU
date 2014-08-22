@@ -135,4 +135,25 @@ class guru extends Controller{
             'notice' => $notice,
             'errors' => $errors]);
     }
+    
+    public function import(){
+        $baseUrl = Config::getBaseUrl();
+        $errors = array();
+        $model = $this->model('Guru');
+        $notice = array();
+        $fileUrl = $_FILES['file']["tmp_name"];
+        $success = $model->upload($fileUrl);
+        if($success){
+            $notice [] = 'Data Guru berhasil diimport';
+        }else{
+           $errors [] = 'maaf, ada kesalahan';
+        }
+        $data_guru = $model->fetchTable();
+        $this->view('admin/guru/index', ['baseUrl' => $baseUrl , 
+            'nav-location' => 'admin',
+            'title' => 'Tabel Guru',
+            'data_guru' => $data_guru,
+            'notice' => $notice,
+            'errors' => $errors]);
+    }
 }

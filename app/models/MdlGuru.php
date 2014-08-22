@@ -29,6 +29,11 @@
  *
  * @author s4if
  */
+
+use Goodby\CSV\Import\Standard\Lexer;
+use Goodby\CSV\Import\Standard\Interpreter;
+use Goodby\CSV\Import\Standard\LexerConfig;
+
 class MdlGuru extends Model {
     public $nip;
     public $nama;
@@ -174,6 +179,30 @@ class MdlGuru extends Model {
 	}catch(PDOException $e){
             //die($e->getMessage());
             return false;
+        }
+    }
+    
+    public function upload($urlFIle){
+        
+        $pdo = $this->db;
+
+        $config = new LexerConfig();
+        $config->setDelimiter(";");
+        $lexer = new Lexer($config);
+
+        $interpreter = new Interpreter();
+        $interpreter->unstrict(); // Ignore row column count consistency
+
+        $interpreter->addObserver(function(array $columns) use ($pdo) {
+            $stmt = $pdo->prepare('REPLACE INTO guru (nip, nama, jenis_kelamin, password) '
+                    . 'VALUES (?, ?, ?, ?)');
+            $stmt->execute($columns);
+        });
+        try {
+            $lexer->parse($urlFIle, $interpreter);
+            return TRUE;
+        } catch (Exception $ex) {
+            return FALSE;
         }
     }
 }

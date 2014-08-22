@@ -29,7 +29,12 @@
  *
  * @author s4if
  */
-class MdlSiswa extends Model {
+
+use Goodby\CSV\Import\Standard\Lexer;
+use Goodby\CSV\Import\Standard\Interpreter;
+use Goodby\CSV\Import\Standard\LexerConfig;
+
+class MdlSiswa extends Model {    
     public $nis;
     public $nama;
     public $kelas;
@@ -184,6 +189,7 @@ class MdlSiswa extends Model {
     }
     
     public function upload($urlFIle){
+        
         $pdo = $this->db;
 
         $config = new LexerConfig();
@@ -194,7 +200,7 @@ class MdlSiswa extends Model {
         $interpreter->unstrict(); // Ignore row column count consistency
 
         $interpreter->addObserver(function(array $columns) use ($pdo) {
-            $stmt = $pdo->prepare('INSERT INTO siswa (nis, nama, kelas, jurusan, paralel, jenis_kelamin) '
+            $stmt = $pdo->prepare('REPLACE INTO siswa (nis, nama, jenis_kelamin, kelas, jurusan, paralel) '
                     . 'VALUES (?, ?, ?, ?, ?, ?)');
             $stmt->execute($columns);
         });
