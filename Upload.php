@@ -1,6 +1,6 @@
 <?php
 
-/*
+/* 
  * The MIT License
  *
  * Copyright 2014 s4if.
@@ -24,23 +24,12 @@
  * THE SOFTWARE.
  */
 
-/**
- * Description of home
- *
- * @author s4if
- */
-//ga yakin, ini home besar ato home kecil
-class Admin extends Controller {
-    
-    public function index(){
-        $model = $this->model('Guru');
-        $data_guru = $model->fetchTable();
-        $baseUrl = Config::getBaseUrl();
-        
-        $this->view('admin/guru/index', ['baseUrl' => $baseUrl , 
-            'nav-location' => 'admin',
-            'title' => 'Tabel Guru',
-            'data_guru' => $data_guru]);
-    }
-    
+
+if ($_FILES["file"]["error"] > 0) {
+  echo "Error: " . $_FILES["file"]["error"] . "<br>";
+} else {
+  echo "Upload: " . $_FILES["file"]["name"] . "<br>";
+  echo "Type: " . $_FILES["file"]["type"] . "<br>";
+  echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+  echo "Stored in: " . $_FILES["file"]["tmp_name"];
 }

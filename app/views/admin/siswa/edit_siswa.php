@@ -92,7 +92,7 @@ require_once '../app/views/core/navbar.php';
                     <div class="col-sm-1">
                         <!-- INI ADALAH POST UNTUK MENENTUKAN PAGE!! 
                         HARAP DIGANTI JIKA MAU COPASS!! -->
-                        <input type="text" class="form-control invisible" name="url" value="admin/edit_siswa/<?=$data['siswa']->nis?>">
+                        <input type="text" class="form-control invisible" name="url" value="siswa/edit/<?=$data['siswa']->nis?>">
                     </div>
                 </div>
                 <div class="form-group error">
@@ -162,7 +162,7 @@ require_once '../app/views/core/navbar.php';
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-6">
                         <button type="submit" class="btn btn-sm btn-primary">OK</button>
-                        <a class="btn btn-sm btn-warning" href="<?=$data['baseUrl'];?>public/admin/siswa/">Cancel</a>
+                        <a class="btn btn-sm btn-warning" href="<?=$data['baseUrl'];?>public/siswa/index/">Cancel</a>
                     </div>
                 </div>
             </form>  

@@ -36,12 +36,12 @@
             <table class="table">
                 <tr>
                     <td>
-                        <a href="<?=$data['baseUrl'];?>public/admin/guru">Guru</a>
+                        <a href="<?=$data['baseUrl'];?>public/guru/index">Guru</a>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <a href="<?=$data['baseUrl'];?>public/admin/siswa">Siswa</a>
+                        <a href="<?=$data['baseUrl'];?>public/siswa/index">Siswa</a>
                     </td>
                 </tr>
             </table>

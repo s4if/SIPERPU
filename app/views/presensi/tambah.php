@@ -62,8 +62,8 @@ require_once '../app/views/core/navbar.php';
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-6">
                             <a class="btn btn-sm btn-primary" 
-                               href="<?=$data['baseUrl'];?>public/absen/konfirmasi/<?=$data['siswa']->nis?>">OK</a>
-                            <a class="btn btn-sm btn-warning" href="<?=$data['baseUrl'];?>public/absen/index">Batal</a>
+                               href="<?=$data['baseUrl'];?>public/presensi/konfirmasi/<?=$data['siswa']->nis?>">OK</a>
+                            <a class="btn btn-sm btn-warning" href="<?=$data['baseUrl'];?>public/presensi/index">Batal</a>
                         </div>
                     </div>
                 </form> 

@@ -33,7 +33,7 @@ class Controller {
 
     public function model($model){
         require_once '../app/models/Mdl'.$model.'.php';
-        $modelObj = 'mdl'.$model;
+        $modelObj = 'Mdl'.$model;
         return new $modelObj();
     }
     

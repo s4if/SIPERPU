@@ -30,7 +30,7 @@
  * @author s4if
  */
 //ga yakin, ini home besar ato home kecil
-class Absen extends Controller {
+class Presensi extends Controller {
     
     public function index(){
         $presensi = $this->model('Presensi');
@@ -38,7 +38,7 @@ class Absen extends Controller {
         $tanggal = date('l, d M Y');
         $waktu = date("H:i:s");
         $data_siswa = $presensi->fetchPresensi(date("Y-m-d"));
-        $this->view('absen/index', ['baseUrl' => $baseUrl ,
+        $this->view('presensi/index', ['baseUrl' => $baseUrl ,
             'nav-location' => 'absensi',
             'title'=>'Absensi Perpustakaan',
             'data_siswa' => $data_siswa,
@@ -52,13 +52,13 @@ class Absen extends Controller {
         $siswa->nis = $nis; //$_POST['nis'];
         if($siswa->userExists()){
             $siswa->fetch();
-            $this->view('absen/tambah', ['baseUrl' => $baseUrl ,
+            $this->view('presensi/tambah', ['baseUrl' => $baseUrl ,
                 'nav-location' => 'absensi',
                 'title'=>'Absensi Perpustakaan',
                 'siswa' => $siswa]);
         }  else {
             $error = 'Maaf, siswa dengan NIS : '.$siswa->nis." Tidak ditemukan.";
-            $this->view('absen/error', ['baseUrl' => $baseUrl ,
+            $this->view('presensi/error', ['baseUrl' => $baseUrl ,
                 'nav-location' => 'absensi',
                 'title'=>'Absensi Perpustakaan',
                 'error'=>$error]);
@@ -74,7 +74,7 @@ class Absen extends Controller {
         $tgl_input = date("Y-m-d");
         $waktu = date("H:i:s");
         if($presensi->exists($nis, $tgl_input)){
-            $error [] = 'Maaf, Anda sudah absen hari ini';
+            $error [] = 'Maaf, Anda sudah presensi hari ini';
         }else{
             if($presensi->add($nis, $tgl_input, $_SESSION['nip'], $waktu)){
                 $notice[] = 'Presensi berhasi dicatat.';
@@ -83,7 +83,7 @@ class Absen extends Controller {
             }
         }
         $data_siswa = $presensi->fetchPresensi(date("Y-m-d"));
-        $this->view('absen/index', ['baseUrl' => $baseUrl ,
+        $this->view('presensi/index', ['baseUrl' => $baseUrl ,
             'nav-location' => 'absensi',
             'title'=>'Absensi Perpustakaan',
             'data_siswa' => $data_siswa,
@@ -111,7 +111,7 @@ class Absen extends Controller {
             }
         }
         $data_siswa = $presensi->fetchPresensi(date("Y-m-d"));
-        $this->view('absen/index', ['baseUrl' => $baseUrl ,
+        $this->view('presensi/index', ['baseUrl' => $baseUrl ,
             'nav-location' => 'absensi',
             'title'=>'Absensi Perpustakaan',
             'data_siswa' => $data_siswa,

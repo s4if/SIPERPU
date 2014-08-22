@@ -57,7 +57,7 @@ require_once '../app/views/core/navbar.php';
                 </div>
                 <?php
                 } ?>
-                <a href="<?=$data['baseUrl'];?>public/admin/tambah_siswa" class="btn btn-default btn-xs">
+                <a href="<?=$data['baseUrl'];?>public/siswa/tambah" class="btn btn-default btn-xs">
                     <span class="glyphicon glyphicon-plus"></span>
                     Tambah
                 </a>
@@ -86,7 +86,7 @@ require_once '../app/views/core/navbar.php';
                         <td><?php echo $siswa['jurusan'];?></td>
                         <td><?php echo $siswa['paralel'];?></td>
                         <td>
-                        <a class="btn btn-xs btn-success" href="<?php echo $data['baseUrl'].'public/admin/edit_siswa/'.$siswa['nis'];?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a class="btn btn-xs btn-success" href="<?php echo $data['baseUrl'].'public/siswa/edit/'.$siswa['nis'];?>"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#myModal<?php echo $siswa['nis'];?>">
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
@@ -102,7 +102,7 @@ require_once '../app/views/core/navbar.php';
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <a class="btn btn-danger" href="<?php echo $data['baseUrl'].'public/admin/hapus_siswa/'.$siswa['nis'];?>">OK</a>
+                        <a class="btn btn-danger" href="<?php echo $data['baseUrl'].'public/siswa/hapus/'.$siswa['nis'];?>">OK</a>
                         </div>
                         </div>
                         </div>

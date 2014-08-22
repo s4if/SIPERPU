@@ -66,7 +66,7 @@ require_once '../app/views/core/navbar.php';
                     <div class="input-group">
                         <div class="input-group-addon">NIS</div>
                         <input type="text" class="form-control" name="param" placeholder="Masukkan NIS">
-                        <input type="text" class="form-control hidden" name="url" value="absen/tambah">
+                        <input type="text" class="form-control hidden" name="url" value="presensi/tambah">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-default">OK</button>
@@ -115,7 +115,7 @@ require_once '../app/views/core/navbar.php';
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <a class="btn btn-danger" href="<?php echo $data['baseUrl'].'public/absen/hapus/'.$siswa['nis'];?>">OK</a>
+                        <a class="btn btn-danger" href="<?php echo $data['baseUrl'].'public/presensi/hapus/'.$siswa['nis'];?>">OK</a>
                         </div>
                         </div>
                         </div>

@@ -182,4 +182,27 @@ class MdlSiswa extends Model {
             return false;
         }
     }
+    
+    public function upload($urlFIle){
+        $pdo = $this->db;
+
+        $config = new LexerConfig();
+        $config->setDelimiter(";");
+        $lexer = new Lexer($config);
+
+        $interpreter = new Interpreter();
+        $interpreter->unstrict(); // Ignore row column count consistency
+
+        $interpreter->addObserver(function(array $columns) use ($pdo) {
+            $stmt = $pdo->prepare('INSERT INTO siswa (nis, nama, kelas, jurusan, paralel, jenis_kelamin) '
+                    . 'VALUES (?, ?, ?, ?, ?, ?)');
+            $stmt->execute($columns);
+        });
+        try {
+            $lexer->parse($urlFIle, $interpreter);
+            return TRUE;
+        } catch (Exception $ex) {
+            return FALSE;
+        }
+    }
 }

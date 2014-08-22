@@ -42,7 +42,7 @@
             <ul class="nav navbar-nav">
                 <li class="<?php if(isset($data['nav-location'])) {
                     echo ($data['nav-location'] == 'absensi')?'active':''; 
-                }?>"><a href="<?php echo $data['baseUrl'];?>public/absen/index">Absensi</a></li>
+                }?>"><a href="<?php echo $data['baseUrl'];?>public/presensi/index">Presensi</a></li>
                 <li class="<?php if(isset($data['nav-location'])) {
                     echo ($data['nav-location'] == 'admin')?'active':''; 
                 }?>"><a href="<?php echo $data['baseUrl'];?>public/admin/index">Admin</a></li>

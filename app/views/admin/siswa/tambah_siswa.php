@@ -80,7 +80,7 @@ require_once '../app/views/core/navbar.php';
                     <div class="col-sm-1">
                         <!-- INI ADALAH POST UNTUK MENENTUKAN PAGE!! 
                         HARAP DIGANTI JIKA MAU COPASS!! -->
-                        <input type="text" class="form-control invisible" name="url" value="admin/tambah_siswa">
+                        <input type="text" class="form-control invisible" name="url" value="siswa/tambah">
                     </div>
                 </div>
                 <div class="form-group error">
@@ -108,7 +108,7 @@ require_once '../app/views/core/navbar.php';
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-6">
                         <button type="submit" class="btn btn-sm btn-primary">OK</button>
-                        <a class="btn btn-sm btn-warning" href="<?=$data['baseUrl'];?>public/admin/siswa/">Cancel</a>
+                        <a class="btn btn-sm btn-warning" href="<?=$data['baseUrl'];?>public/siswa/index/">Cancel</a>
                     </div>
                 </div>
             </form>  
