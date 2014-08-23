@@ -194,6 +194,7 @@ class MdlSiswa extends Model {
 
         $config = new LexerConfig();
         $config->setDelimiter(";");
+        $config->setIgnoreHeaderLine(TRUE);
         $lexer = new Lexer($config);
 
         $interpreter = new Interpreter();
