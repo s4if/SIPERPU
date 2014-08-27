@@ -57,30 +57,32 @@ require_once '../app/views/core/navbar.php';
                 </div>
                 <?php
                 } ?>
-                <a href="<?=$data['baseUrl'];?>public/guru/tambah" class="btn btn-primary btn-xs">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    Tambah
-                </a>
-                <a class="btn btn-xs btn-info" data-toggle="modal" data-target="#ModalImport">
-                    <span class="glyphicon glyphicon-import"></span>
-                    Import
-                </a>
-                <div class="modal fade" id="ModalImport" tabindex="-1" role="dialog" aria-labelledby="ModalImport" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="ModalImportLabel>">Pilih File</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form" method="post" action="<?=$data['baseUrl'];?>public/" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <label>Masukkan Input</label>
-                                        <input type="file" id="file" name="file">
-                                        <input type="text" class="form-control hidden" name="url" value="guru/import">
-                                    </div>
-                                    <button type="submit" class="btn btn-default">Submit</button>
-                                </form>
+                <div class="btn-group">
+                    <a href="<?=$data['baseUrl'];?>public/guru/tambah" class="btn btn-primary btn-xs">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Tambah
+                    </a>
+                    <a class="btn btn-xs btn-info" data-toggle="modal" data-target="#ModalImport">
+                        <span class="glyphicon glyphicon-import"></span>
+                        Import
+                    </a>
+                    <div class="modal fade" id="ModalImport" tabindex="-1" role="dialog" aria-labelledby="ModalImport" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="ModalImportLabel>">Pilih File</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form role="form" method="post" action="<?=$data['baseUrl'];?>public/" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label>Masukkan Input</label>
+                                            <input type="file" id="file" name="file">
+                                            <input type="text" class="form-control hidden" name="url" value="guru/import">
+                                        </div>
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

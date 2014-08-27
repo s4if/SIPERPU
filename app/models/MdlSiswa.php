@@ -79,6 +79,33 @@ class MdlSiswa extends Model {
         }
     }
     
+    public function fetchTableCond($kelas = 'empty', $jurusan = 'empty', $paralel = 'empty'){
+        if($paralel === 'empty'){
+            if($kelas === 'empty'){
+                if($jurusan === 'empty'){
+                    return $this->fetchTable();
+                }
+            }
+        }
+    }
+
+    public function fetchQuery(){
+        
+        $query = $this->db->prepare($strQuery);
+        
+        try{
+		
+            $query->execute();
+            $data = $query->fetchAll();
+            return $data;
+            
+	}catch(PDOException $e){
+            
+            die($e->getMessage());
+            
+        }
+    }
+    
     public function assign($data = []){
         
         $this->nama = $data['nama'];
@@ -209,7 +236,25 @@ class MdlSiswa extends Model {
             $lexer->parse($urlFIle, $interpreter);
             return TRUE;
         } catch (Exception $ex) {
+            die($ex->getMessage());
             return FALSE;
+        }
+    }
+    
+    public function search($name){
+        $strquery = "SELECT * FROM siswa where siswa.nama like '%".$name."%'";
+        $query = $this->db->prepare($strquery);
+        
+        try{
+		
+            $query->execute();
+            $data = $query->fetchAll();
+            return $data;
+            
+	}catch(PDOException $e){
+            
+            die($e->getMessage());
+            
         }
     }
 }

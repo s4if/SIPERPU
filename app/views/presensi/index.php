@@ -70,7 +70,34 @@ require_once '../app/views/core/navbar.php';
                     </div>
                 </div>
                 <button type="submit" class="btn btn-default">OK</button>
+                <a class="btn btn-info" data-toggle="modal" data-target="#myModalSearch">
+                    Cari nama
+                </a>
             </form>
+            <div class="modal fade" id="myModalSearch" tabindex="-1" role="dialog" aria-labelledby="myModalSearch" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabelSearch">Masukkan Nama</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline" role="form" method="post" action="<?=$data['baseUrl'];?>translator.php">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">Nama</div>
+                            <input type="text" class="form-control" name="param" placeholder="Masukkan Nama">
+                            <input type="text" class="form-control hidden" name="url" value="presensi/cari">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">OK</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+            </div>
+            </div>
+            </div>
         </div>
         <div class="col-md-12">
             &InvisibleComma;

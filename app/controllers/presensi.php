@@ -120,4 +120,19 @@ class Presensi extends Controller {
             'notice' => $notice,
             'errors' => $error]);
     }
+    
+    public function cari($nama = ''){
+        $model = $this->model('Siswa');
+        $data_siswa = $model->search($nama);
+        $baseUrl = Config::getBaseUrl();
+        $notice = array();
+        $error = array();
+        
+        $this->view('presensi/cari', ['baseUrl' => $baseUrl ,
+            'nav-location' => 'absensi',
+            'title'=>'Absensi Perpustakaan',
+            'data_siswa' => $data_siswa,
+            'notice' => $notice,
+            'errors' => $error]);
+    }
 }

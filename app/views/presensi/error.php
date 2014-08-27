@@ -37,7 +37,7 @@ require_once '../app/views/core/navbar.php';
                 <h3><?=$data['error']?></h3>
             </div>
             <div class="panel-footer">
-                <a class="btn btn-sm btn-warning" href="<?=$data['baseUrl'];?>public/absen/index">OK</a>
+                <a class="btn btn-sm btn-warning" href="<?=$data['baseUrl'];?>public/presensi/index">OK</a>
             </div>
         </div>
     </div>
