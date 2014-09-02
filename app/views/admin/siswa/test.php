@@ -23,12 +23,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-session_start();
-if(empty($_POST['kode'])){
-    header('location:public/'.$_POST['url'].'/'.$_POST['param']);
-}elseif ($_POST['kode'] === 'siswa'){
-    $kelas = (empty($_POST['kelas']))?'empty':$_POST['kelas'];
-    $jurusan = (empty($_POST['jurusan']))?'empty':$_POST['jurusan'];
-    $paralel = (empty($_POST['paralel']))?'empty':$_POST['paralel'];
-    header('location:public/'.$_POST['url'].'/'.$kelas.'-'.$jurusan.'-'.$paralel);
-}
+
+
+print_r($data['data_siswa'], false);

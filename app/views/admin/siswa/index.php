@@ -57,30 +57,88 @@ require_once '../app/views/core/navbar.php';
                 </div>
                 <?php
                 } ?>
-                <a href="<?=$data['baseUrl'];?>public/siswa/tambah" class="btn btn-primary btn-xs">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    Tambah
-                </a>
-                <a class="btn btn-xs btn-info" data-toggle="modal" data-target="#ModalImport">
-                    <span class="glyphicon glyphicon-import"></span>
-                    Import
-                </a>
-                <div class="modal fade" id="ModalImport" tabindex="-1" role="dialog" aria-labelledby="ModalImport" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="ModalImportLabel>">Pilih File</h4>
+                <div class="btn-group">
+                    <a href="<?=$data['baseUrl'];?>public/siswa/tambah" class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Tambah
+                    </a>
+                    <a class="btn btn-sm btn-info" data-toggle="modal" data-target="#ModalImport">
+                        <span class="glyphicon glyphicon-import"></span>
+                        Import
+                    </a>
+                    <div class="modal fade" id="ModalImport" tabindex="-1" role="dialog" aria-labelledby="ModalImport" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="ModalImportLabel>">Pilih File</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form role="form" method="post" action="<?=$data['baseUrl'];?>public/" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label>Masukkan Input</label>
+                                            <input type="file" id="file" name="file">
+                                            <input type="text" class="form-control hidden" name="url" value="siswa/import">
+                                        </div>
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                                <form role="form" method="post" action="<?=$data['baseUrl'];?>public/" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <label>Masukkan Input</label>
-                                        <input type="file" id="file" name="file">
-                                        <input type="text" class="form-control hidden" name="url" value="siswa/import">
+                        </div>
+                    </div>
+                    <a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#ModalSort">
+                        <span class="glyphicon glyphicon-sort"></span>
+                        Filter
+                    </a>
+                    <div class="modal fade" id="ModalSort" tabindex="-1" role="dialog" aria-labelledby="ModalSort" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="ModalImportLabel>">Urut Berdasarkan :</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <form role="form form-inline" method="post" action="<?=$data['baseUrl'];?>translator.php">
+                                            <div class="form-group col-xs-12">
+                                                <div class="col-xs-5">
+                                                    <label class="control-label">
+                                                        <small>Kelas - Jurusan - Paralel :</small>
+                                                    </label>
+                                                </div>
+                                                <div class="input-group-sm col-xs-2">
+                                                    <select class="form-control" name="kelas">
+                                                        <option value="empty" >--</option>
+                                                        <option value="X">X</option>
+                                                        <option value="XI">XI</option>
+                                                        <option value="XII">XII</option>
+                                                    </select>
+                                                </div>
+                                                <div class="input-group-sm col-xs-2">
+                                                    <select class="form-control" name="jurusan">
+                                                        <option value="empty" >--</option>
+                                                        <option value="AP" >AP</option>
+                                                        <option value="AK">AK</option>
+                                                        <option value="PM">PM</option>
+                                                        <option value="RPL">RPL</option>
+                                                    </select>
+                                                </div>
+                                                <div class="input-group-sm col-xs-2">
+                                                    <input type="text" class="form-control" name="paralel" 
+                                                           value="">
+                                                    <input type="text" class="form-control hidden" name="url" value="siswa/lihat">
+                                                    <input type="text" class="form-control hidden" name="kode" value="siswa">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-6">
+                                                    <button type="submit" class="btn btn-sm btn-primary">OK</button>
+                                                    <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <button type="submit" class="btn btn-default">Submit</button>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>

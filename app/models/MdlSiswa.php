@@ -78,14 +78,88 @@ class MdlSiswa extends Model {
             
         }
     }
+    //ok
+    public function fetchByClass($kelas){
+        $query = $this->db->prepare("select * from siswa where kelas = ?");
+        $query->bindValue(1, $kelas);
+        try{
+		
+            $query->execute();
+            $data = $query->fetchAll();
+            return $data;
+            
+	}catch(PDOException $e){
+            
+            die($e->getMessage());
+            
+        }
+    }
+    //ok
+    public function fetchByJur($jurusan){
+        $query = $this->db->prepare("select * from siswa where jurusan = ?");
+        $query->bindValue(1, $jurusan);
+        try{
+		
+            $query->execute();
+            $data = $query->fetchAll();
+            return $data;
+            
+	}catch(PDOException $e){
+            
+            die($e->getMessage());
+            
+        }
+    }
     
-    public function fetchTableCond($kelas = 'empty', $jurusan = 'empty', $paralel = 'empty'){
-        if($paralel === 'empty'){
-            if($kelas === 'empty'){
-                if($jurusan === 'empty'){
-                    return $this->fetchTable();
-                }
-            }
+    public function fetchByJurPar($jurusan, $paralel){
+        $query = $this->db->prepare("select * from siswa where jurusan = ? and paralel = ?");
+        $query->bindValue(1, $jurusan);
+        $query->bindValue(2, $paralel);
+        try{
+		
+            $query->execute();
+            $data = $query->fetchAll();
+            return $data;
+            
+	}catch(PDOException $e){
+            
+            die($e->getMessage());
+            
+        }
+    }
+    //ok
+    public function fetchByClassJur($kelas, $jurusan){
+        $query = $this->db->prepare("select * from siswa where kelas = ? and jurusan = ?");
+        $query->bindValue(1, $kelas);
+        $query->bindValue(2, $jurusan);
+        try{
+		
+            $query->execute();
+            $data = $query->fetchAll();
+            return $data;
+            
+	}catch(PDOException $e){
+            
+            die($e->getMessage());
+            
+        }
+    }
+    
+    public function fetchByClassJurPar($kelas, $jurusan, $paralel){
+        $query = $this->db->prepare("select * from siswa where kelas = ? and jurusan = ? and paralel = ?");
+        $query->bindValue(1, $kelas);
+        $query->bindValue(2, $jurusan);
+        $query->bindValue(3, $paralel);
+        try{
+		
+            $query->execute();
+            $data = $query->fetchAll();
+            return $data;
+            
+	}catch(PDOException $e){
+            
+            die($e->getMessage());
+            
         }
     }
 

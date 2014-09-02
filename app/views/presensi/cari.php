@@ -33,7 +33,7 @@ require_once '../app/views/core/navbar.php';
         </div>
         <div class="col-md-offset-1 col-md-10">
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-bordered table-condensed">
                     <thead>
                         <tr>
                             <td>NIS</td>

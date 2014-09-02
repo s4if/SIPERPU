@@ -164,4 +164,32 @@ class siswa extends Controller{
             'notice' => $notice,
             'errors' => $errors]);
     }
+    
+    public function lihat($input = ''){
+        $params = explode('-', $input);
+        $model = $this->model('Siswa');
+        $data_siswa = array();
+        $errors = array();
+        if($params[2] === 'empty' && $params[1] === 'empty' &&  !($params[0] === 'empty') ){
+            $data_siswa = $model->fetchByClass($params[0]);
+        }elseif ($params[2] === 'empty' && $params[0] === 'empty' &&  !($params[1] === 'empty')) {
+            $data_siswa = $model->fetchByJur($params[1]);
+        }elseif ($params[2] === 'empty' && !($params[1] === 'empty') && !($params[0] === 'empty')) {
+            $data_siswa = $model->fetchByClassJur($params[0],$params[1]);
+        }elseif ($params[0] === 'empty' && !($params[1] === 'empty') && !($params[2] === 'empty')) {
+            $data_siswa = $model->fetchByJurPar($params[1], $params[2]);
+        }elseif(!($params[2] === 'empty') && !($params[1] === 'empty') && !($params[0] === 'empty')){
+            $data_siswa = $model->fetchByClassJurPar($params[0], $params[1],$params[2]);
+        }else{
+            $errors [] = 'Maaf, kombinasi input tidak diijinkan';
+            $data_siswa = $model->fetchTable();
+        }
+        $baseUrl = Config::getBaseUrl();
+        
+        $this->view('admin/siswa/index', ['baseUrl' => $baseUrl , 
+            'nav-location' => 'admin',
+            'title' => 'Tabel Siswa',
+            'data_siswa' => $data_siswa,
+            'errors' => $errors]);
+    }
 }
