@@ -30,7 +30,7 @@
  * @author s4if
  */
 
-class Home extends Controller {
+class Rekap extends Controller {
     
     public function index($name = ''){
         $user = $this->model('User');
@@ -41,5 +41,19 @@ class Home extends Controller {
             'name' => $user->name, 
             'nav-location' => 'admin',
             'title'=>'Home!']);
+    }
+    
+    public function harian($tanggal = NULL){
+        $rekap = $this->model('Rekap');
+        $baseUrl = Config   ::getBaseUrl();
+        if($tanggal === NULL){
+            $tanggal = date("Y-m-d");
+        }
+        $data_siswa = $rekap->fetchHarian($tanggal);
+        $this->view('rekap/index', ['baseUrl' => $baseUrl ,
+            'nav-location' => 'absensi',
+            'title'=>'Absensi Perpustakaan',
+            'data_siswa' => $data_siswa,
+            'tanggal' => $tanggal]);
     }
 }

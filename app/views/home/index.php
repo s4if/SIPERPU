@@ -25,6 +25,15 @@
  */
 require_once '../app/views/core/navbar.php';
 ?>
-Hello <?php echo isset($data['name'])? $data['name']:'';
-echo isset($data['nama'])? $data['nama']:'';
-?>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <?php require_once '../app/views/core/sidenav.php'; ?>
+        </div>
+        <div class="col-md-10">
+            Hello <?php echo isset($data['name'])? $data['name']:'';
+                echo isset($data['nama'])? $data['nama']:'';
+            ?>
+        </div>
+    </div>
+</div>

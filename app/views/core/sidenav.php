@@ -60,22 +60,27 @@
             <table class="table">
                 <tr>
                     <td>
-                        <a href="#">Per Kelas</a>
+                        <a href="<?=$data['baseUrl'];?>public/rekap/harian">Harian</a>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <a href="#">Per Tanggal</a>
+                        <a href="<?=$data['baseUrl'];?>public/rekap/mingguan">Mingguan</a>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <a href="#">Per Jurusan</a>
+                        <a href="<?=$data['baseUrl'];?>public/rekap/bulanan">Bulanan</a>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <a href="#">Per Siswa</a>
+                        <a href="<?=$data['baseUrl'];?>public/rekap/semester">Semester</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="<?=$data['baseUrl'];?>public/rekap/tahunan">Tahunan</a>
                     </td>
                 </tr>
             </table>

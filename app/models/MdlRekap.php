@@ -25,21 +25,31 @@
  */
 
 /**
- * Description of home
+ * Description of MdlRekap
  *
  * @author s4if
  */
-
-class Home extends Controller {
-    
-    public function index($name = ''){
-        $user = $this->model('User');
-        $user->name = $name;
-        $baseUrl = Config::getBaseUrl();
-       
-        $this->view('home/index', ['baseUrl' => $baseUrl ,
-            'name' => $user->name, 
-            'nav-location' => 'admin',
-            'title'=>'Home!']);
+class MdlRekap extends Model {
+    //put your code here
+    public function fetchHarian($tanggal){
+        $query = $this->db->prepare("select siswa.nis as 'nis', "
+                . "siswa.nama as 'nama', siswa.kelas as 'kelas', "
+                . "siswa.jurusan as 'jurusan', "
+                . "siswa.paralel as 'paralel', "
+                . "siswa.jenis_kelamin as 'jenis_kelamin' "
+                . "from siswa cross join absen using (nis) "
+                . "where absen.tanggal = ? order by absen.waktu asc;");
+        $query->bindValue(1, $tanggal);
+        try{
+            
+            $query->execute();
+            $data = $query->fetchAll();
+            return $data;
+            
+	}catch(PDOException $e){
+            
+            die($e->getMessage());
+            
+        }
     }
 }

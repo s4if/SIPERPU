@@ -36,19 +36,6 @@ class Login extends Controller {
             'title'=>'Login Sistem Absensi Perpustakaan']);
     }
     
-    //nanti dihapus
-//    public function test(){
-//        $baseUrl = Config::getBaseUrl();
-//        $user = $this->model('User');
-//        $user->name = $_POST['username'];
-//        $user->password = $_POST['password'];
-//       
-//        $this->view('login/test', ['baseUrl' => $baseUrl ,
-//            'name' => $user->name, 
-//            'password' => $user->password, 
-//            'title'=>'Login Sistem Absensi Perpustakaan']);
-//    }
-    
     public function login(){
         $this->sessionCheck();
         $guru = $this->model('Guru');
@@ -83,9 +70,9 @@ class Login extends Controller {
             $_SESSION['nip'] = $guru->nip;
             $_SESSION['nama'] = $guru->nama;
             $_SESSION['jenis_kelamin'] = $guru->jenis_kelamin;
-            $this->view('home/index', ['nama' => $guru->nama,
+            $this->view('presensi/index', ['nama' => $guru->nama,
                 'baseUrl' => Config::getBaseUrl(),
-                'title' => 'Beranda']);
+                'title' => 'Presensi']);
         }else{
             $errors [] = 'Kesalahan : Password Salah!';
             $this->view('login/index', ['baseUrl' => Config::getBaseUrl() ,

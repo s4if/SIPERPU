@@ -37,28 +37,28 @@ require_once '../app/views/core/navbar.php';
         <div class="col-md-12">
             <?php if(empty($data['notice']) === false){
                     ?>
-                <div class="alert alert-success alert-dismissible">
-                <?php
-                    echo '<button type="button" class="close" data-dismiss="alert"><p>' . 
-                            '<span aria-hidden="true">&times;</span><span class="sr-only">'.
-                            'Close</span></button>'.
-                            implode('</p><p>', $data['notice']) . '</p>';	
-                    ?>
-                </div>
-                <?php
-                }
-                if(empty($data['errors']) === false){
-                    ?>
-                <div class="alert alert-warning alert-dismissible">
-                <?php
-                    echo '<button type="button" class="close" data-dismiss="alert"><p>' . 
-                            '<span aria-hidden="true">&times;</span><span class="sr-only">'.
-                            'Close</span></button>'.
-                            implode('</p><p>', $data['errors']) . '</p></span></button>';	
-                    ?>
-                </div>
-                <?php
-                }?>
+            <div class="alert alert-success alert-dismissible">
+            <?php
+                echo '<button type="button" class="close" data-dismiss="alert"><p>' . 
+                        '<span aria-hidden="true">&times;</span><span class="sr-only">'.
+                        'Close</span></button>'.
+                        implode('</p><p>', $data['notice']) . '</p>';	
+                ?>
+            </div>
+            <?php
+            }
+            if(empty($data['errors']) === false){
+                ?>
+            <div class="alert alert-warning alert-dismissible">
+            <?php
+                echo '<button type="button" class="close" data-dismiss="alert"><p>' . 
+                        '<span aria-hidden="true">&times;</span><span class="sr-only">'.
+                        'Close</span></button>'.
+                        implode('</p><p>', $data['errors']) . '</p></span></button>';	
+                ?>
+            </div>
+            <?php
+            }?>
         </div>
         <div class="col-md-offset-4 col-md-5">
             <form class="form-inline" role="form" method="post" action="<?=$data['baseUrl'];?>translator.php">
