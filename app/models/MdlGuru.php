@@ -98,6 +98,23 @@ class MdlGuru extends Model {
 	}
     }
     
+    public function updatePassword($nip, $password){
+        $query = $this->db->prepare("UPDATE guru "
+                . "SET password=? "
+                . "where nip=? ;");
+        $query->bindValue(1, $password);
+        $query->bindValue(2, $nip);
+        try{
+		
+            $query->execute();
+            $this->password = $password;
+            return TRUE;
+	}catch(PDOException $e){
+            //die($e->getMessage());
+            return false;
+	}
+    }
+    
     public function userExists() {
         
         $strquery = "SELECT COUNT(`nip`) FROM `guru` WHERE `nip`= ?";

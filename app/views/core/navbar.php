@@ -47,16 +47,21 @@
                     echo ($data['nav-location'] == 'admin')?'active':''; 
                 }?>"><a href="<?php echo $data['baseUrl'];?>public/admin/index">Admin</a></li>
             </ul>
+            <?php if(isset($data['nav-location'])) {
+                if($data['nav-location'] == 'admin'){?>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">Menu <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>&MediumSpace;Edit Profil</a></li>
+                        <li><a href="<?=$data['baseUrl'];?>public/admin/password">
+                                <span class="glyphicon glyphicon-user"></span>&MediumSpace;Ganti Password</a></li>
                         <li class="divider"></li>
                         <li><a href="<?=$data['baseUrl'];?>public/login/logout"><span class="glyphicon glyphicon-log-out"></span>&MediumSpace;Keluar</a></li>
                     </ul>
                 </li>
             </ul>
+            <?php }
+            } ?>
         </div><!-- /.navbar-collapse -->
     </div>
 </nav>

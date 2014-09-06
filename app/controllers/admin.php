@@ -43,4 +43,41 @@ class Admin extends Controller {
             'data_guru' => $data_guru]);
     }
     
+    public function password(){
+        $model = $this->model('Guru');
+        $data_guru = $model->fetchTable();
+        $baseUrl = Config::getBaseUrl();
+        
+        $this->view('admin/password', ['baseUrl' => $baseUrl , 
+            'nav-location' => 'admin',
+            'title' => 'Tabel Guru',
+            'data_guru' => $data_guru]);
+    }
+    
+    public function ganti_password(){
+        $model = $this->model('Guru');
+        $baseUrl = Config::getBaseUrl();
+        $nip = $_SESSION['nip'];
+        $model->nip = $nip;
+        $stored_password = $_POST['stored_password'];
+        $new_password = $_POST['new_password'];
+        $password = $model->fetchPassword();
+        if ($stored_password === $password){
+            $notice = array();
+            $model->updatePassword($nip, $new_password);
+            $data_guru = $model->fetchTable();
+            $notice[] = "Password berhasil diganti";
+            $this->view('admin/guru/index', ['baseUrl' => $baseUrl , 
+                'nav-location' => 'admin',
+                'title' => 'Tabel Guru',
+                'notice' => $notice,
+                'data_guru' => $data_guru]);
+        }  else {
+            $notice[] = "Maaf, Password lama yang anda masukkan salah";
+            $this->view('admin/password', ['baseUrl' => $baseUrl , 
+                'nav-location' => 'admin',
+                'title' => 'Password',
+                'errors' => $notice]);
+        }
+    }
 }
