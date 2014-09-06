@@ -1,6 +1,4 @@
-<?php
-
-/*
+/* 
  * The MIT License
  *
  * Copyright 2014 s4if.
@@ -24,36 +22,5 @@
  * THE SOFTWARE.
  */
 
-/**
- * Description of home
- *
- * @author s4if
- */
 
-class Rekap extends Controller {
-    
-    public function index($name = ''){
-        $user = $this->model('User');
-        $user->name = $name;
-        $baseUrl = Config::getBaseUrl();
-       
-        $this->view('home/index', ['baseUrl' => $baseUrl ,
-            'name' => $user->name, 
-            'nav-location' => 'admin',
-            'title'=>'Home!']);
-    }
-    
-    public function harian($tanggal = NULL){
-        $rekap = $this->model('Rekap');
-        $baseUrl = Config   ::getBaseUrl();
-        if($tanggal === NULL){
-            $tanggal = date("Y-m-d");
-        }
-        $data_siswa = $rekap->fetchHarian($tanggal);
-        $this->view('rekap/index', ['baseUrl' => $baseUrl ,
-            'nav-location' => 'admin',
-            'title'=>'Absensi Perpustakaan',
-            'data_siswa' => $data_siswa,
-            'tanggal' => $tanggal]);
-    }
-}
+$.fn.datepicker.defaults.format = "yyyy/mm/dd";

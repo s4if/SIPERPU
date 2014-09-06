@@ -43,8 +43,9 @@
                     </div>
                     <div class="form-group form-horizontal">
                         <input type="text" class="form-control col-xs-4 hidden" name="url" value="login/login">
-                        <button type="submit" class="btn btn-sm btn-default col-xs-4">Masuk</button>
                     </div>
+                    <button type="submit" class="btn btn-sm btn-default col-xs-4">Masuk</button>
+                    <a href="<?=$data['baseUrl']?>public/presensi" class="btn btn-sm btn-warning col-xs-6 col-xs-offset-2">Halaman Presensi</a>
                 </form>
             </div>
         </div>

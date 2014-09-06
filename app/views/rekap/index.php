@@ -81,8 +81,8 @@ require_once '../app/views/core/navbar.php';
                                                 </label>
                                             </div>
                                             <div class="input-group-sm col-xs-6">
-                                                <input type="text" class="form-control" name="param" 
-                                                       value="">
+                                                <input type="date" data-provide="datepicker" class="form-control" name="param" 
+                                                       value="<?=$data['tanggal']?>">
                                                 <input type="text" class="form-control hidden" name="url" value="rekap/harian">
                                             </div>
                                         </div>

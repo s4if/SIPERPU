@@ -29,7 +29,6 @@
  *
  * @author s4if
  */
-//ga yakin, ini home besar ato home kecil
 class Presensi extends Controller {
     
     public function index(){
@@ -76,7 +75,7 @@ class Presensi extends Controller {
         if($presensi->exists($nis, $tgl_input)){
             $error [] = 'Maaf, Anda sudah presensi hari ini';
         }else{
-            if($presensi->add($nis, $tgl_input, $_SESSION['nip'], $waktu)){
+            if($presensi->add($nis, $tgl_input, $waktu)){
                 $notice[] = 'Presensi berhasi dicatat.';
             }else{
                 $error[] = 'Maaf, Terjadi Kesalahan';

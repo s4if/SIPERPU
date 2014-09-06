@@ -37,7 +37,7 @@ class Login extends Controller {
     }
     
     public function login(){
-        $this->sessionCheck();
+        //$this->sessionCheck();
         $guru = $this->model('Guru');
         $errors = [];
         $nip = '';
@@ -70,7 +70,7 @@ class Login extends Controller {
             $_SESSION['nip'] = $guru->nip;
             $_SESSION['nama'] = $guru->nama;
             $_SESSION['jenis_kelamin'] = $guru->jenis_kelamin;
-            $this->view('presensi/index', ['nama' => $guru->nama,
+            $this->view('admin/index', ['nama' => $guru->nama,
                 'baseUrl' => Config::getBaseUrl(),
                 'title' => 'Presensi']);
         }else{

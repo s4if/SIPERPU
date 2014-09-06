@@ -53,16 +53,14 @@ class MdlPresensi extends Model {
         }
     }
     
-    public function add($nis, $tanggal, $nip, $waktu){
+    public function add($nis, $tanggal, $waktu){
         $query = $this->db->prepare("insert into absen "
                 . "SET nis=?, "
                 . "tanggal=?, "
-                . "nip=?, "
                 . "waktu=?");
         $query->bindValue(1, $nis);
         $query->bindValue(2, $tanggal);
-        $query->bindValue(3, $nip);
-        $query->bindValue(4, $waktu);
+        $query->bindValue(3, $waktu);
         try{
 		
             $query->execute();
