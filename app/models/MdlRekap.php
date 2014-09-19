@@ -32,13 +32,19 @@
 class MdlRekap extends Model {
     //put your code here
     public function fetchHarian($tanggal){
-        $query = $this->db->prepare("select siswa.nis as 'nis', "
-                . "siswa.nama as 'nama', siswa.kelas as 'kelas', "
-                . "siswa.jurusan as 'jurusan', "
-                . "siswa.paralel as 'paralel', "
-                . "siswa.jenis_kelamin as 'jenis_kelamin' "
-                . "from siswa cross join absen using (nis) "
-                . "where absen.tanggal = ? order by absen.waktu asc;");
+        $query = $this->db->prepare("SELECT siswa.kelas as 'out_kelas', 
+            siswa.jurusan as 'out_jurusan', 
+            siswa.paralel as 'out_paralel',
+            (select count(absen.nis)  
+            from absen right join siswa on absen.nis = siswa.nis 
+            where absen.tanggal  = ? and
+            siswa.kelas = out_kelas and
+            siswa.jurusan = out_jurusan and
+            siswa.paralel = out_paralel
+            group by kelas, jurusan, paralel
+            ) as 'count'
+            from absen right join siswa on absen.nis = siswa.nis
+            group by kelas, jurusan, paralel");
         $query->bindValue(1, $tanggal);
         try{
             

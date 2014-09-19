@@ -100,27 +100,23 @@ require_once '../app/views/core/navbar.php';
                 </div>
             </div>
             <div class=" col-sm-10 col-sm-offset-1">
-                <table class="table table-bordered table-condensed">
+                <table class="table table-striped table-responsive">
                     <thead>
                         <tr>
-                            <td>NIS</td>
-                            <td>Nama</td>
-                            <td>P/L</td>
                             <td>Kelas</td>
                             <td>Jurusan</td>
                             <td>Paralel</td>
+                            <td>Jumlah Siswa Hadir</td>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         foreach ($data['data_siswa'] as $siswa){?>
                         <tr>
-                        <td><?php echo $siswa['nis'];?></td>
-                        <td><?php echo $siswa['nama'];?></td>
-                        <td><?php echo $siswa['jenis_kelamin'];?></td>
-                        <td><?php echo $siswa['kelas'];?></td>
-                        <td><?php echo $siswa['jurusan'];?></td>
-                        <td><?php echo $siswa['paralel'];?></td>
+                        <td><?php echo $siswa['out_kelas'];?></td>
+                        <td><?php echo $siswa['out_jurusan'];?></td>
+                        <td><?php echo $siswa['out_paralel'];?></td>
+                        <td><?php echo ($siswa['count'] === NULL)? 0:$siswa['count'];?></td>
                         </tr>
                         <?php
                         }?>

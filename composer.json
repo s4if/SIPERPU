@@ -1,7 +1,8 @@
 {
     "name": "s4if/sa-pu-skanida",
     "require": {
-        "goodby/csv": "*"
+        "goodby/csv": "1.1.0",
+        "phpoffice/phpexcel": "1.8.0"
     },
     "license": "MIT",
     "authors": [
