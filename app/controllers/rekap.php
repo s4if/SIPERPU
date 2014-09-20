@@ -56,7 +56,7 @@ class Rekap extends Controller {
             siswa.paralel as 'out_paralel',
             (select count(absen.nis)  
             from absen right join siswa on absen.nis = siswa.nis 
-            where absen.tanggal  = ? and
+            where absen.tanggal  = '".$tanggal."' and
             siswa.kelas = out_kelas and
             siswa.jurusan = out_jurusan and
             siswa.paralel = out_paralel
@@ -64,12 +64,48 @@ class Rekap extends Controller {
             ) as 'count'
             from absen right join siswa on absen.nis = siswa.nis
             group by kelas, jurusan, paralel";
-        $data_siswa = $rekap->rekapHarian($tanggal);
+        $data_siswa = $rekap->fetch($query);
         $this->view('rekap/index', ['baseUrl' => $baseUrl ,
             'nav-location' => 'admin',
-            'title'=>'Absensi Perpustakaan',
+            'title'=>'Rekap Harian',
             'data_siswa' => $data_siswa,
             'query' => $query,
             'tanggal' => $tanggal]);
+    }
+    
+    public function mingguan($tanggalAwal = NULL){
+        $rekap = $this->model('Rekap');
+        $baseUrl = Config   ::getBaseUrl();
+        if($tanggalAwal === NULL){
+            $tanggal = new DateTime(date("Y-m-d"));
+            $tanggal->modify("-6 day");
+            $tanggalAwal = $tanggal->format("Y-m-d");
+        }else{
+            
+        }
+        $tanggal = new DateTime($tanggalAwal);
+        $tanggal->modify("+6 day");
+        $tanggalAkhir = $tanggal->format("Y-m-d");
+        $query = "SELECT siswa.kelas as 'out_kelas', 
+            siswa.jurusan as 'out_jurusan', 
+            siswa.paralel as 'out_paralel',
+            (select count(absen.nis)  
+            from absen right join siswa on absen.nis = siswa.nis 
+            where (absen.tanggal between '".$tanggalAwal."' and '".$tanggalAkhir."') and
+            siswa.kelas = out_kelas and
+            siswa.jurusan = out_jurusan and
+            siswa.paralel = out_paralel
+            group by kelas, jurusan, paralel
+            ) as 'count'
+            from absen right join siswa on absen.nis = siswa.nis
+            group by kelas, jurusan, paralel";
+        $data_siswa = $rekap->fetch($query);
+        $this->view('rekap/mingguan', ['baseUrl' => $baseUrl ,
+            'nav-location' => 'admin',
+            'title'=>'Rekap Mingguan',
+            'data_siswa' => $data_siswa,
+            'query' => $query,
+            'tanggalAwal' => $tanggalAwal,
+            'tanggalAkhir' => $tanggalAkhir]);
     }
 }

@@ -59,15 +59,15 @@ require_once '../app/views/core/navbar.php';
                 }?>
             </div>
             <div class="col-sm-11 col-sm-offset-1">
-                Rekap Tanggal : <?=$data['tanggal']?>&MediumSpace;
+                Rekap Tanggal : <?=$data['tanggalAwal']?> S/d <?=$data['tanggalAkhir']?> &MediumSpace;
                 <a class="btn btn-sm btn-default" data-toggle="modal" data-target="#ModalSort">
                     <span class="glyphicon glyphicon-calendar"></span>
                     Ubah Tanggal
                 </a>
                 <form class="form-inline" name="myform" action="<?=$data['baseUrl'];?>Export.php" method="POST">
                     <input type="hidden" name="query" value="<?=$data['query']?>">
-                    <input type="hidden" name="tanggal" value="<?=$data['tanggal']?>">
-                    <input type="hidden" name="filename" value="rekap-harian-<?=$data['tanggal']?>">
+                    <input type="hidden" name="" value="<?=$data['tanggalAwal']?>">
+                    <input type="hidden" name="filename" value="rekap-mingguan [<?=$data['tanggalAwal']?> s/d <?=$data['tanggalAkhir']?>]">
                        <a class="btn btn-sm btn-info" onclick="document.myform.submit()">
                     Export</a>
                 </form>

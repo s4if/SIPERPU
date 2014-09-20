@@ -59,4 +59,19 @@ class MdlRekap extends Model {
             
         }
     }
+    
+    public function fetch($strQuery){
+        $query = $this->db->prepare($strQuery);
+        try{
+            
+            $query->execute();
+            $data = $query->fetchAll();
+            return $data;
+            
+	}catch(PDOException $e){
+            
+            die($e->getMessage());
+            
+        }
+    }
 }

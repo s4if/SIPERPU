@@ -42,9 +42,7 @@ $db = $conf->getDB();
 // Create new PHPExcel object
 $objPHPExcel = new PHPExcel();
 $qrString = $_POST['query'];
-$tanggal = $_POST['tanggal'];
 $query = $db->prepare($qrString);
-$query->bindValue(1, $tanggal);
 try{
 
     $query->execute();
@@ -76,7 +74,7 @@ foreach ($data as $row){
 
 // Redirect output to a client’s web browser (Excel5)
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="'.$_POST['prefix'].$tanggal.'.xls"');
+header('Content-Disposition: attachment;filename="'.$_POST['filename'].'.xls"');
 header('Cache-Control: max-age=0');
 
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
