@@ -24,4 +24,4 @@
  * THE SOFTWARE.
  */
 
-header('location:public/login');
+header('location:public/presensi');

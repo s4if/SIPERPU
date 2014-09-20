@@ -29,9 +29,10 @@
  *
  * @author s4if
  */
+
 class MdlRekap extends Model {
-    //put your code here
-    public function fetchHarian($tanggal){
+    
+    public function rekapHarian($tanggal){
         $query = $this->db->prepare("SELECT siswa.kelas as 'out_kelas', 
             siswa.jurusan as 'out_jurusan', 
             siswa.paralel as 'out_paralel',

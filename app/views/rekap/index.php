@@ -64,6 +64,13 @@ require_once '../app/views/core/navbar.php';
                     <span class="glyphicon glyphicon-calendar"></span>
                     Ubah Tanggal
                 </a>
+                <form class="form-inline" name="myform" action="<?=$data['baseUrl'];?>Export.php" method="POST">
+                    <input type="hidden" name="query" value="<?=$data['query']?>">
+                    <input type="hidden" name="tanggal" value="<?=$data['tanggal']?>">
+                    <input type="hidden" name="prefix" value="rekap-harian-">
+                       <a class="btn btn-sm btn-info" onclick="document.myform.submit()">
+                    Export</a>
+                </form>
                 <div class="modal fade" id="ModalSort" tabindex="-1" role="dialog" aria-labelledby="ModalSort" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
