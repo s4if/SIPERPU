@@ -186,4 +186,41 @@ class Rekap extends Controller {
             'tanggal' => $tanggal]);
     }
     
+    
+    public function tahunan($tahunAwal =null){
+        $rekap = $this->model('Rekap');
+        $baseUrl = Config   ::getBaseUrl();
+        $tanggal = date("Y-m-d");
+        $tg = explode('-', $tanggal);
+        if($tahunAwal === NULL){
+            $thn = new DateTime(date("Y-m-d"));
+            if($thn->format("m")<=6){
+                $thn->modify("-1 year");
+            }
+            $tahunAwal = $thn->format("Y");
+        }
+        $tahunAkhir = $tahunAwal+1;
+        $query = "SELECT siswa.kelas as 'out_kelas', 
+            siswa.jurusan as 'out_jurusan', 
+            siswa.paralel as 'out_paralel',
+            (select count(absen.nis)  
+            from absen right join siswa on absen.nis = siswa.nis 
+            where  absen.tanggal between '".$tahunAwal."-7-1' and '".$tahunAkhir."-6-30' and
+            siswa.kelas = out_kelas and
+            siswa.jurusan = out_jurusan and
+            siswa.paralel = out_paralel
+            group by kelas, jurusan, paralel
+            ) as 'count'
+            from absen right join siswa on absen.nis = siswa.nis
+            group by kelas, jurusan, paralel";
+        $data_siswa = $rekap->fetch($query);
+        $this->view('rekap/tahunan', ['baseUrl' => $baseUrl ,
+            'nav-location' => 'admin',
+            'title'=>'Rekap Semester',
+            'data_siswa' => $data_siswa,
+            'query' => $query,
+            'tahunAwal' => $tahunAwal,
+            'tahunAkhir' => $tahunAkhir,
+            'tanggal' => $tanggal]);
+    }
 }
