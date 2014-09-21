@@ -59,15 +59,15 @@ require_once '../app/views/core/navbar.php';
                 }?>
             </div>
             <div class="col-sm-11 col-sm-offset-1">
-                Rekap Tanggal : <?=$data['tanggalAwal']?> S/d <?=$data['tanggalAkhir']?> &MediumSpace;
+                Rekap Semester : <?=$data['semester']?> - <?=$data['tahun']?> &MediumSpace;
                 <a class="btn btn-sm btn-default" data-toggle="modal" data-target="#ModalSort">
                     <span class="glyphicon glyphicon-calendar"></span>
-                    Ubah Tanggal
+                    Ubah Semester
                 </a>
                 <form class="form-inline" name="myform" action="<?=$data['baseUrl'];?>Export.php" method="POST">
                     <input type="hidden" name="query" value="<?=$data['query']?>">
-                    <input type="hidden" name="" value="<?=$data['tanggalAwal']?>">
-                    <input type="hidden" name="filename" value="rekap-mingguan [<?=$data['tanggalAwal']?> s/d <?=$data['tanggalAkhir']?>]">
+                    <input type="hidden" name="tanggal" value="<?=$data['tanggal']?>">
+                    <input type="hidden" name="filename" value="rekap-Semester-<?=$data['semester']?>">
                        <a class="btn btn-sm btn-info" onclick="document.myform.submit()">
                     Export</a>
                 </form>
@@ -82,15 +82,25 @@ require_once '../app/views/core/navbar.php';
                                 <div class="container-fluid">
                                     <form role="form form-inline" method="post" action="<?=$data['baseUrl'];?>translator.php">
                                         <div class="form-group col-xs-12">
-                                            <div class="col-xs-3">
+                                            <div class="col-xs-2">
                                                 <label class="control-label">
-                                                    <small>Tanggal : </small>
+                                                    <small>Bulan : </small>
                                                 </label>
                                             </div>
-                                            <div class="input-group-sm col-xs-6">
-                                                <input type="date" data-provide="datepicker" class="form-control" name="param" 
-                                                       value="<?=$data['tanggalAwal']?>">
-                                                <input type="text" class="form-control hidden" name="url" value="rekap/mingguan">
+                                            <div class="input-group-sm col-xs-4">
+                                                <select class="form-control" name="param">
+                                                    <option value="Ganjil">Ganjil</option>
+                                                    <option value="Genap">Genap</option>
+                                                </select>
+                                                <input type="text" class="form-control hidden" name="url" value="rekap/semester">
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <label class="control-label">
+                                                    <small>Tahun : </small>
+                                                </label>
+                                            </div>
+                                            <div class="input-group-sm col-xs-4">
+                                                <input type="text" class="form-control" name="param2" value="<?=$data['tahun'];?>">
                                             </div>
                                         </div>
                                         <div class="form-group">

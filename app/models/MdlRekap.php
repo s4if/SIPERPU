@@ -103,4 +103,24 @@ class MdlRekap extends Model {
                 return "Desember";
         }
     }
+    
+    public function cekSemester($semester){
+        if($semester === 'Ganjil' || $semester === 'Genap'){
+            if($semester === 'Ganjil' ){
+                return [
+                    'bulanAwal' => 1,
+                    'bulanAkhir' => 6,
+                    'semester' => "Ganjil"
+                ];
+            }  else {
+                return [
+                    'bulanAwal' => 7,
+                    'bulanAkhir' => 12,
+                    'semester' => "Genap"
+                ];
+            }
+        }else{
+            return false;
+        }
+    }
 }

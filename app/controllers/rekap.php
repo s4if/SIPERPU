@@ -143,4 +143,47 @@ class Rekap extends Controller {
             'tanggal' => $tanggal]);
     }
     
+    public function semester($semester = NULL, $tahun =null){
+        $rekap = $this->model('Rekap');
+        $baseUrl = Config   ::getBaseUrl();
+        $tanggal = date("Y-m-d");
+        $tg = explode('-', $tanggal);
+        if($semester === NULL){
+            if($tg[1] <=6){
+                $semester ='Ganjil';
+            }  else {
+                $semester ='Genap';
+            }
+        }
+        if($tahun === NULL){
+           $tahun = $tg[0];
+        }
+        $smstr = $rekap->cekSemester($semester);
+        $bulanAwal = $smstr['bulanAwal'];
+        $bulanAkhir = $smstr['bulanAkhir'];
+        $query = "SELECT siswa.kelas as 'out_kelas', 
+            siswa.jurusan as 'out_jurusan', 
+            siswa.paralel as 'out_paralel',
+            (select count(absen.nis)  
+            from absen right join siswa on absen.nis = siswa.nis 
+            where  month(absen.tanggal) between ".$bulanAwal." and ".$bulanAkhir." and 
+            year(absen.tanggal) = '".$tahun."' and
+            siswa.kelas = out_kelas and
+            siswa.jurusan = out_jurusan and
+            siswa.paralel = out_paralel
+            group by kelas, jurusan, paralel
+            ) as 'count'
+            from absen right join siswa on absen.nis = siswa.nis
+            group by kelas, jurusan, paralel";
+        $data_siswa = $rekap->fetch($query);
+        $this->view('rekap/semester', ['baseUrl' => $baseUrl ,
+            'nav-location' => 'admin',
+            'title'=>'Rekap Semester',
+            'data_siswa' => $data_siswa,
+            'query' => $query,
+            'semester' => $semester,
+            'tahun' => $tahun,
+            'tanggal' => $tanggal]);
+    }
+    
 }

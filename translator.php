@@ -25,7 +25,11 @@
  */
 session_start();
 if(empty($_POST['kode'])){
-    header('location:public/'.$_POST['url'].'/'.$_POST['param']);
+    if(empty($_POST['param'])){
+        header('location:public/'.$_POST['url'].'/'.$_POST['param']);
+    }  else {
+        header('location:public/'.$_POST['url'].'/'.$_POST['param'].'/'.$_POST['param2']);
+    }
 }elseif ($_POST['kode'] === 'siswa'){
     $kelas = (empty($_POST['kelas']))?'empty':$_POST['kelas'];
     $jurusan = (empty($_POST['jurusan']))?'empty':$_POST['jurusan'];
