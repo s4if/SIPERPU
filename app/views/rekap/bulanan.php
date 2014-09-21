@@ -59,15 +59,15 @@ require_once '../app/views/core/navbar.php';
                 }?>
             </div>
             <div class="col-sm-11 col-sm-offset-1">
-                Rekap Tanggal : <?=$data['tanggalAwal']?> S/d <?=$data['tanggalAkhir']?> &MediumSpace;
+                Rekap Bulan : <?=$data['namaBulan']?>&MediumSpace;
                 <a class="btn btn-sm btn-default" data-toggle="modal" data-target="#ModalSort">
                     <span class="glyphicon glyphicon-calendar"></span>
-                    Ubah Tanggal
+                    Ubah Bulan
                 </a>
                 <form class="form-inline" name="myform" action="<?=$data['baseUrl'];?>Export.php" method="POST">
                     <input type="hidden" name="query" value="<?=$data['query']?>">
-                    <input type="hidden" name="" value="<?=$data['tanggalAwal']?>">
-                    <input type="hidden" name="filename" value="rekap-mingguan [<?=$data['tanggalAwal']?> s/d <?=$data['tanggalAkhir']?>]">
+                    <input type="hidden" name="tanggal" value="<?=$data['tanggal']?>">
+                    <input type="hidden" name="filename" value="rekap-Bulanan-<?=$data['namaBulan']?>">
                        <a class="btn btn-sm btn-info" onclick="document.myform.submit()">
                     Export</a>
                 </form>
@@ -84,13 +84,25 @@ require_once '../app/views/core/navbar.php';
                                         <div class="form-group col-xs-12">
                                             <div class="col-xs-3">
                                                 <label class="control-label">
-                                                    <small>Tanggal : </small>
+                                                    <small>Bulan : </small>
                                                 </label>
                                             </div>
                                             <div class="input-group-sm col-xs-6">
-                                                <input type="date" data-provide="datepicker" class="form-control" name="param" 
-                                                       value="<?=$data['tanggal']?>">
-                                                <input type="text" class="form-control hidden" name="url" value="rekap/mingguan">
+                                                <select class="form-control" name="param">
+                                                    <option value="1">Januari</option>
+                                                    <option value="2">Pebruari</option>
+                                                    <option value="3">Maret</option>
+                                                    <option value="4">April</option>
+                                                    <option value="5">Mei</option>
+                                                    <option value="6">Juni</option>
+                                                    <option value="7">Juli</option>
+                                                    <option value="8">Agustus</option>
+                                                    <option value="9">September</option>
+                                                    <option value="10">Oktober</option>
+                                                    <option value="11">Nopember</option>
+                                                    <option value="12">Desember</option>
+                                                </select>
+                                                <input type="text" class="form-control hidden" name="url" value="rekap/bulanan">
                                             </div>
                                         </div>
                                         <div class="form-group">

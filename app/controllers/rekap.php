@@ -29,8 +29,6 @@
  *
  * @author s4if
  */
-use PHPExcel;
-use PHPExcel_IOFactory;
 
 class Rekap extends Controller {
     
@@ -108,4 +106,41 @@ class Rekap extends Controller {
             'tanggalAwal' => $tanggalAwal,
             'tanggalAkhir' => $tanggalAkhir]);
     }
+    
+    public function bulanan($bulan = NULL){
+        $rekap = $this->model('Rekap');
+        $baseUrl = Config   ::getBaseUrl();
+        $tanggal = date("Y-m-d");
+        $tg = explode('-', $tanggal);
+        if($bulan === NULL){
+            $bulan = $tg[1];
+        }
+        $tahun = $tg[0];
+        
+        $namaBulan = $rekap->namaBulan($bulan);
+        $query = "SELECT siswa.kelas as 'out_kelas', 
+            siswa.jurusan as 'out_jurusan', 
+            siswa.paralel as 'out_paralel',
+            (select count(absen.nis)  
+            from absen right join siswa on absen.nis = siswa.nis 
+            where  month(absen.tanggal) = '".$bulan."' and 
+            year(absen.tanggal) = '".$tahun."' and
+            siswa.kelas = out_kelas and
+            siswa.jurusan = out_jurusan and
+            siswa.paralel = out_paralel
+            group by kelas, jurusan, paralel
+            ) as 'count'
+            from absen right join siswa on absen.nis = siswa.nis
+            group by kelas, jurusan, paralel";
+        $data_siswa = $rekap->fetch($query);
+        $this->view('rekap/bulanan', ['baseUrl' => $baseUrl ,
+            'nav-location' => 'admin',
+            'title'=>'Rekap Bulanan',
+            'data_siswa' => $data_siswa,
+            'query' => $query,
+            'namaBulan' => $namaBulan,
+            'bulan' => $bulan,
+            'tanggal' => $tanggal]);
+    }
+    
 }
