@@ -29,7 +29,7 @@ class Config{
     }
     
     public static function getBaseUrl(){
-        $baseUrl= '/SAPu-SKANIDA/';
+        $baseUrl= '/SIPERPU/';
         return $baseUrl;
     }
 
