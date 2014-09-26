@@ -34,7 +34,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Sistem Absensi Perpustakaan SMK N 2 Magelang</a>
+            <a class="navbar-brand" href="#">Sistem Presensi Perpustakaan SMK N 2 Magelang</a>
         </div>
         
         <!-- Collect the nav links, forms, and other content for toggling -->
